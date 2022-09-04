@@ -1,0 +1,29 @@
+textarea{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    padding: 1em;
+    resize: none;
+    width: 300px;
+    min-height: 300px;
+    border: none;
+    outline: none;
+}
+
+.mat-card {
+    box-shadow: none
+}
+
+#photoUpload{
+    display: none;
+}
+
+#preview{
+    text-align: left;
+    margin-top: 1em;
+}
+
+#imagePreview{
+    object-fit: cover;
+    object-position: center;
+    width: 150px;
+    height: 100px;
+}
