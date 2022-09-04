@@ -1,0 +1,15 @@
+mat-card{
+    max-width: 600px;
+    margin-bottom: 5px;
+}
+
+mat-icon.action{
+    margin-right: 20px;
+}
+
+mat-icon{
+    cursor: pointer;
+}
+
+
+

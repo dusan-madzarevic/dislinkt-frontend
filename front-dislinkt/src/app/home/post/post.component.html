@@ -1,0 +1,24 @@
+<mat-card>
+    <app-profile-short [name]="post['name']" [surname]="post['surname']" [date]="post['date']"></app-profile-short>
+
+    <app-image [imagePath]="post.picture" [post]="true"></app-image>
+    <mat-card-content>
+        {{post['text']}}
+    </mat-card-content>
+    <mat-card-actions>
+        <mat-icon class="action">favorite_border</mat-icon>
+        <mat-icon class="action">close</mat-icon>
+        <mat-icon class="action" (click)="toggle()">chat_bubble_outline</mat-icon>
+        <div [style.display]="displayComments" class="comments">
+            <mat-list>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let comment of comments">{{comment.text}}<mat-divider></mat-divider></mat-list-item>
+                <div id="reply">
+                    <input  placeholder="Comment...">
+                    <button mat-flat-button>
+                        <mat-icon>send</mat-icon></button>
+                </div>     
+            </mat-list>  
+        </div>
+    </mat-card-actions>    
+</mat-card>
