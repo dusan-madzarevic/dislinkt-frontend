@@ -36,10 +36,10 @@ jobs:
         run: npm i
           
       - name: Run Unit Tests
-        run: npm run ci:test
+        run: npm run test
 
       - name: Clean Distribution Directory
-        run: npm run ci:clean
+        run: npm run clean
         
       - name: Build Application
-        run: npm run ci:build
+        run: npm run build
