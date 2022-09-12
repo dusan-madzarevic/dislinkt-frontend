@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +9,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public authService: AuthenticationService
+  ) { }
 
   loginPending = false;
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required,
     Validators.pattern(new RegExp('\\S'))]),
     password: new FormControl('', [Validators.required,
-    Validators.pattern(new RegExp('\\S'))])
+    Validators.pattern(new RegExp('\\S'))]),
+    grant_type: new FormControl('password'),
+    scope: new FormControl(''),
+    client_id: new FormControl(''),
+    client_secret: new FormControl('')
   });
 
   login(): void{
@@ -23,24 +30,8 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loginPending = true;
-/*       this.userService.login(this.loginForm.value).subscribe(
-        (user: User) => {
-          this.loginPending = false;
-          if (user){
-            this.authService.saveUser(user);
-            if (user.role === "client"){
-              console.log("client");
-              this.router.navigate(['/home/request']);
-              return;
-            }
-            console.log("admin");
-            this.router.navigate(['/home/search']);
-          }
-          else{
-            this.snackBar.open("Pogresni email ili lozinka!", SNACKBAR_CLOSE, SNACKBAR_ERROR_OPTIONS);
-          }
-        }
-      ); */
+    this.authService.login(this.loginForm);
+    
   } 
 
   ngOnInit(): void {
