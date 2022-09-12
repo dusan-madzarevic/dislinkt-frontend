@@ -36,7 +36,7 @@ jobs:
         working-directory: ./front-dislinkt
           
       - name: Run Unit Tests
-        run: npm run test
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
         working-directory: ./front-dislinkt
 
       - name: Clean Distribution Directory
