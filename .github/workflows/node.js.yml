@@ -36,13 +36,13 @@ jobs:
         working-directory: ./front-dislinkt
           
       - name: Run Unit Tests
-        run: npm run ci:test
+        run: npm run test
         working-directory: ./front-dislinkt
 
       - name: Clean Distribution Directory
-        run: npm run ci:clean
+        run: npm run clean
         working-directory: ./front-dislinkt
         
       - name: Build Application
-        run: npm run ci:build
+        run: npm run build
         working-directory: ./front-dislinkt
