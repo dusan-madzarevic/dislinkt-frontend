@@ -1,1 +1,109 @@
-<p>register works!</p>
+<app-form-container>
+    <h2>Sign Up</h2>
+    <form [formGroup]="registrationForm">
+        <div [class.disabled]="registrationPending">
+            <!-- <mat-form-field appearance="fill">
+                <mat-label>Input</mat-label>
+                <input matInput>
+            </mat-form-field> -->
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="email" 
+                placeholder="Unesite email">
+                <mat-error>
+                    Enter email!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Korisnicko ime</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="username"
+                placeholder="Unesite korisnicko ime">
+                <mat-error>
+                    Enter username!
+                </mat-error>    
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Lozinka</mat-label>
+                <input 
+                type="password" 
+                matInput 
+                autocomplete="off"
+                formControlName="password"
+                placeholder="Unesite lozinku">
+                <mat-error>
+                    Enter password!
+                </mat-error>    
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Ime</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="ime"
+                placeholder="Unesite ime">
+                <mat-error>
+                    Enter name!
+                </mat-error>    
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Prezime</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="prezime"
+                placeholder="Unesite prezime">
+                <mat-error>
+                    Enter name!
+                </mat-error>    
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Broj telefona</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="telefon"
+                placeholder="Unesite broj telefona">   
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Datum rodjenja</mat-label>
+                <input 
+                matInput 
+                [matDatepicker]="picker"
+                formControlName="datumRodjenja"
+                placeholder="Unesite datum rodjenja">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!-- <mat-form-field> -->
+            <div>
+                <mat-label>Pol</mat-label>
+                <mat-radio-group formControlName="pol"
+                aria-labelledby="pol-radio-group-label"
+                class="pol-radio-group">
+                    <mat-radio-button class="pol-radio-button" value="m">Muski</mat-radio-button>
+                    <mat-radio-button class="pol-radio-button" value="z">Zenski</mat-radio-button>
+                </mat-radio-group>   
+            </div> 
+            <!-- </mat-form-field> -->
+        </div>
+        <br>
+        <app-center-container>
+            <button 
+            *ngIf="!registrationPending"
+            mat-raised-button 
+            color="primary"
+            (click)="register()">Sign Up</button>
+            <app-spinner-button *ngIf="registrationPending"></app-spinner-button>
+        </app-center-container>
+        <app-center-container>
+            <mat-icon [ngStyle]="{'color':'black'}">person_add</mat-icon>
+            <a routerLink="login">Log In</a>
+        </app-center-container>
+    </form>
+</app-form-container>

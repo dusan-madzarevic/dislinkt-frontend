@@ -4,7 +4,7 @@
         <div class="spacer"></div>
         <div *ngIf = "guest">
             <button mat-button  (click)="login()"><mat-icon>exit_to_app</mat-icon>  Sign In</button>
-            <button mat-button><mat-icon>person_add</mat-icon>  Sign Up</button>
+            <button mat-button (click)="register()"><mat-icon>person_add</mat-icon>  Sign Up</button>
         </div>
         <div *ngIf = "!guest">
             <button mat-button><mat-icon>exit_to_app</mat-icon>  Sign Out</button>
