@@ -8,7 +8,8 @@ export const environment = {
   apiPost: 'posts',
   apiImage: 'images',
   apiComment: 'comments',
-  apiReg: 'register'
+  apiReg: 'register',
+  apiLogin: 'token'
 };
 
 
