@@ -35,6 +35,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  register(): void{
+    this.router.navigate(['/register']);
+  }
+
   newPost(): void{
     this.dialog.open(CreatePostComponent);
   }

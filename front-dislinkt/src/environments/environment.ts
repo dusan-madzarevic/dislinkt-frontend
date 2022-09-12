@@ -7,8 +7,10 @@ export const environment = {
   baseUrl: 'http://localhost:8000',
   apiPost: 'posts',
   apiImage: 'images',
-  apiComment: 'comments'
+  apiComment: 'comments',
+  apiReg: 'register'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

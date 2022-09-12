@@ -1,0 +1,42 @@
+.mat-form-field {
+    display: block;
+}    
+.mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0;
+}
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.1em 0 0.5em 0 
+}
+
+.mat-icon {
+    padding-top: 20px;
+}  
+
+a {
+    padding: 25px 8px 8px 8px;
+    text-decoration: none;
+    color: #0a0a0a;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #167ca1;
+}
+
+body {
+    background-color: #25357c;
+}
+
+.pol-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.pol-radio-button {
+    margin: 5px;
+}
