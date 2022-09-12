@@ -30,10 +30,12 @@ export class PostComponent implements OnInit {
   }
 
   fetchComments(): void{
-    this.commentService.fetchCommentsForPost(this.post.id).subscribe(
-      (comments: Comment[]) => {
-      this.comments = comments;
-    });
+    if(this.post != null){
+      this.commentService.fetchCommentsForPost(this.post.id).subscribe(
+        (comments: Comment[]) => {
+        this.comments = comments;
+      });
+  }
   }
 
 }
