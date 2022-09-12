@@ -27,7 +27,7 @@ import { DatePipe } from '@angular/common'
     MatRadioModule,
     MatInputModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

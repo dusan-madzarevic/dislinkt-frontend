@@ -13,12 +13,11 @@ import { DatePipe } from '@angular/common'
 })
 export class RegisterComponent implements OnInit {
   user: User;
-
+  datePipe = new DatePipe("en-US")
   constructor(
     private fb: FormBuilder,
     private route : Router,
     private regService : AuthenticationService,
-    public datepipe: DatePipe
   ) { }
 
   registrationPending = false;
@@ -40,6 +39,7 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.invalid){
       return;
     }
+
     this.registrationPending = true;
     let email = this.registrationForm.controls['email'].value;
     let username = this.registrationForm.controls['username'].value;
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
     let prezime = this.registrationForm.controls['prezime'].value;
     let telefon = this.registrationForm.controls['telefon'].value;
     let datum = this.registrationForm.controls['datumRodjenja'].value;
-    let datumRodjenja = this.datepipe.transform(datum, 'yyyy-MM-dd');
+    let datumRodjenja = this.datePipe.transform(datum, 'yyyy-MM-dd');
 
     let pol = this.registrationForm.controls['pol'].value;
 
