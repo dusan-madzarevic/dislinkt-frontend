@@ -2,10 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DateTime } from 'luxon';
 import { FormGroup } from '@angular/forms';
+import { Token } from '../models/token';
 
 @Injectable({
   providedIn: 'root'
@@ -32,25 +33,10 @@ export class AuthenticationService {
         catchError((error: any) => {return throwError('Not created'); }));
   }
 
-  login(formGroup: FormGroup) {
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    })
-
-    let formData = new FormData();
-    console.log(formGroup.controls)
-    formData.append('username', formGroup.controls['email'].value)
-    formData.append('password', formGroup.controls['password'].value)
-    formData.append('grant_type', formGroup.controls['grant_type'].value)
-    formData.append('scope', formGroup.controls['scope'].value)
-    formData.append('client_id', formGroup.controls['client_id'].value)
-    formData.append('client_secret', formGroup.controls['client_secret'].value)
-
-
-    return this.http.post(this.API_LOGIN, formData)
-        .subscribe((res:any)=>{
-          this.setSession(res);
-        })
+  login(formData: FormData): Observable<Token>{
+    return this.http.post<Token>(this.API_LOGIN, formData).pipe(
+      catchError(() => of(null))
+    );
   }
 
   setLoggedUser() {
@@ -63,7 +49,7 @@ export class AuthenticationService {
 
 
       
-private setSession(authResult) {
+public setSession(authResult) {
     let expireTime = DateTime.now().plus({minutes: authResult.expires_in_minutes})
     
     localStorage.setItem('access_token', authResult.access_token);
