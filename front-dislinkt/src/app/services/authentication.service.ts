@@ -77,6 +77,10 @@ isLoggedOut() {
     return !this.isLoggedIn();
 }
 
+getToken(){
+  return localStorage.getItem("access_token");
+}
+
 getExpiration() {
     const expiration = localStorage.getItem("expires_at");
     if(expiration != null){
