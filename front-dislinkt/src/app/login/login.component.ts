@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthenticationService } from '../services/authentication.service';
 export class LoginComponent implements OnInit {
 
   constructor(
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    public router: Router,
   ) { }
 
   loginPending = false;
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
     /** get currently logged user */
     this.authService.setLoggedUser();
     this.loginPending = false;
+    this.router.navigate(['/']);
   } 
 
   ngOnInit(): void {
