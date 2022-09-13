@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     }
     this.loginPending = true;
     this.authService.login(this.loginForm);
-    
+    this.loginPending = false;
   } 
 
   ngOnInit(): void {
