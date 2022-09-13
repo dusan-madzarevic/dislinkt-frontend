@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
     }
     this.loginPending = true;
     this.authService.login(this.loginForm);
+    /** get currently logged user */
+    this.authService.setLoggedUser();
     this.loginPending = false;
   } 
 

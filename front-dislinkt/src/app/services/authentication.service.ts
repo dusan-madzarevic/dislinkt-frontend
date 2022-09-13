@@ -14,6 +14,7 @@ export class AuthenticationService {
 
   private readonly API_REG: string = `${environment.baseUrl}/${environment.apiReg}`;
   private readonly API_LOGIN: string = `${environment.baseUrl}/${environment.apiLogin}`;
+  private readonly API_USER: string = `${environment.baseUrl}/${environment.apiUser}`;
 
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -51,6 +52,16 @@ export class AuthenticationService {
           this.setSession(res);
         })
   }
+
+  setLoggedUser() {
+    return this.http.get(this.API_USER)
+        .subscribe((res:any)=>{
+          console.log(res);
+          localStorage.setItem('user', res);
+        })
+  }
+
+
       
 private setSession(authResult) {
     let expireTime = DateTime.now().plus({minutes: authResult.expires_in_minutes})
@@ -62,6 +73,7 @@ private setSession(authResult) {
 logout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("expires_at");
+    localStorage.removeItem("user");
 }
 
 public isLoggedIn() {
@@ -79,6 +91,10 @@ isLoggedOut() {
 
 getToken(){
   return localStorage.getItem("access_token");
+}
+
+getUser(){
+  return localStorage.getItem("user");
 }
 
 getExpiration() {
