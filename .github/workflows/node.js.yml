@@ -55,7 +55,7 @@ jobs:
         with:
           projectBaseDir: front-dislinkt
           args: >
-            -Dsonar.sources=src/
+            -Dsonar.sources=./src/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
