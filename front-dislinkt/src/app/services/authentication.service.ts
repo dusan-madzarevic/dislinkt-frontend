@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment, environment1 } from 'src/environments/environment';
 import { DateTime } from 'luxon';
 import { FormGroup } from '@angular/forms';
 import { Token } from '../models/token';
@@ -13,9 +13,9 @@ import { Token } from '../models/token';
 })
 export class AuthenticationService {
 
-  private readonly API_REG: string = `${environment.baseUrl}/${environment.apiReg}`;
-  private readonly API_LOGIN: string = `${environment.baseUrl}/${environment.apiLogin}`;
-  private readonly API_USER: string = `${environment.baseUrl}/${environment.apiUser}`;
+  private readonly API_REG: string = `${environment1.baseUrl}/${environment1.apiReg}`;
+  private readonly API_LOGIN: string = `${environment1.baseUrl}/${environment1.apiLogin}`;
+  private readonly API_USER: string = `${environment1.baseUrl}/${environment1.apiUser}`;
 
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -26,11 +26,20 @@ export class AuthenticationService {
   ) { }
 
 
-  public signup(user: User) {
+  // public signup(user: User) {
+  //   var headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   return this.http.post<User>(this.API_REG, JSON.stringify(user), {headers}).pipe(
+  //     map((res: any) => { return true; })).pipe(
+  //       catchError((error: any) => {return throwError('Not created'); }));
+  // }
+
+  signup(user: User) {
     var headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<User>(this.API_REG, JSON.stringify(user), {headers}).pipe(
-      map((res: any) => { return true; })).pipe(
-        catchError((error: any) => {return throwError('Not created'); }));
+    var userjson = JSON.stringify(user);
+    console.log(userjson);
+    return this.http.post<User>(this.API_REG, userjson, {headers: headers}).pipe(
+      catchError(() => of(null))
+    );
   }
 
   login(formData: FormData): Observable<Token>{

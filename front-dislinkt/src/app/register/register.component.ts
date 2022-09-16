@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
 import { DatePipe } from '@angular/common'
+import { Profile } from '../models/profile';
+import { ProfileService } from '../services/profile.service';
 
 
 @Component({
@@ -13,11 +15,13 @@ import { DatePipe } from '@angular/common'
 })
 export class RegisterComponent implements OnInit {
   user: User;
+  profile: Profile;
   datePipe = new DatePipe("en-US")
   constructor(
     private fb: FormBuilder,
     private route : Router,
     private regService : AuthenticationService,
+    private profileService : ProfileService, 
   ) { }
 
   registrationPending = false;
@@ -32,6 +36,7 @@ export class RegisterComponent implements OnInit {
     telefon: new FormControl(''),
     datumRodjenja: new FormControl(''),
     pol: new FormControl(''),
+    privacy: new FormControl('')
 
   });
 
@@ -51,6 +56,13 @@ export class RegisterComponent implements OnInit {
     let datumRodjenja = this.datePipe.transform(datum, 'yyyy-MM-dd');
 
     let pol = this.registrationForm.controls['pol'].value;
+    let privacy = this.registrationForm.controls['privacy'].value;
+    let privat : boolean = true;
+
+    if (privacy == "public"){
+      privat = false;
+    }
+
 
     this.user = {
       email: email, 
@@ -67,6 +79,24 @@ export class RegisterComponent implements OnInit {
 
     this.regService.signup(this.user).subscribe( 
       result => {
+
+        console.log(result);
+        this.profile = {
+          user_id: result.user_id,
+          private: privat
+        }
+
+        this.profileService.createProfile(this.profile).subscribe(
+          result => {
+            console.log(result);
+          },
+
+          (err:Error) =>{
+            if(err.toString()==='Not created'){
+              console.log(err);
+            }
+          }
+        )
         this.route.navigate(['/index']);
       },
       
@@ -75,36 +105,14 @@ export class RegisterComponent implements OnInit {
           console.log(err);
         }
       }
-    );
 
+    );
 
   }
   
 
   ngOnInit(): void {
   }
-
-
-
-  // register(){
-  //   this.user = new UserReg();
-  //   this.user.email = this.registrationForm.controls['email'].value;
-  //   this.user.username = this.registrationForm.controls['username'].value;
-  //   this.user.password = this.registrationForm.controls['password'].value;
-  //   //this.user = this.registrationForm.value;
-  //   console.log(this.user);
-  //   this.regService.signup(this.user).subscribe( 
-  //     result => {
-  //       this.route.navigate(['/register-email-confirm']);
-  //     },
-      
-  //     (err:Error) =>{
-  //       console.log("JJFJFFJJ");
-  //       if(err.toString()==='Not created'){
-  //         this.wrong = true;
-  //         console.log(err);
-  //       }
-  //     });
     
 
 
