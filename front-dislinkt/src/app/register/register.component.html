@@ -2,95 +2,92 @@
     <h2>Sign Up</h2>
     <form [formGroup]="registrationForm">
         <div [class.disabled]="registrationPending">
-            <!-- <mat-form-field appearance="fill">
-                <mat-label>Input</mat-label>
-                <input matInput>
-            </mat-form-field> -->
             <mat-form-field>
                 <mat-label>Email</mat-label>
                 <input 
                 matInput 
                 autocomplete="off"
                 formControlName="email" 
-                placeholder="Unesite email">
+                placeholder="Enter email">
                 <mat-error>
-                    Enter email!
+                    Email is required!
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Korisnicko ime</mat-label>
+                <mat-label>Username</mat-label>
                 <input 
                 matInput 
                 autocomplete="off"
                 formControlName="username"
-                placeholder="Unesite korisnicko ime">
+                placeholder="Enter username">
                 <mat-error>
-                    Enter username!
+                    Username is required!
                 </mat-error>    
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Lozinka</mat-label>
+                <mat-label>Password</mat-label>
                 <input 
                 type="password" 
                 matInput 
                 autocomplete="off"
                 formControlName="password"
-                placeholder="Unesite lozinku">
+                placeholder="Enter password">
                 <mat-error>
-                    Enter password!
+                    Password is required!
                 </mat-error>    
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Ime</mat-label>
+                <mat-label>First name</mat-label>
                 <input 
                 matInput 
                 autocomplete="off"
                 formControlName="ime"
-                placeholder="Unesite ime">
-                <mat-error>
-                    Enter name!
-                </mat-error>    
+                placeholder="Enter first name">   
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Prezime</mat-label>
+                <mat-label>Last name</mat-label>
                 <input 
                 matInput 
                 autocomplete="off"
                 formControlName="prezime"
-                placeholder="Unesite prezime">
-                <mat-error>
-                    Enter name!
-                </mat-error>    
+                placeholder="Enter last name">   
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Broj telefona</mat-label>
+                <mat-label>Phone</mat-label>
                 <input 
                 matInput 
                 autocomplete="off"
                 formControlName="telefon"
-                placeholder="Unesite broj telefona">   
+                placeholder="Enter phone number">   
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Datum rodjenja</mat-label>
+                <mat-label>Birth date</mat-label>
                 <input 
                 matInput 
                 [matDatepicker]="picker"
                 formControlName="datumRodjenja"
-                placeholder="Unesite datum rodjenja">
+                placeholder="Enter birth date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <!-- <mat-form-field> -->
             <div>
-                <mat-label>Pol</mat-label>
+                <mat-label>Gender</mat-label>
                 <mat-radio-group ngDefaultControl formControlName="pol"
                 aria-labelledby="pol-radio-group-label"
                 class="pol-radio-group">
-                    <mat-radio-button class="pol-radio-button" value="m">Muski</mat-radio-button>
-                    <mat-radio-button class="pol-radio-button" value="z">Zenski</mat-radio-button>
+                    <mat-radio-button class="pol-radio-button" value="m">Male</mat-radio-button>
+                    <mat-radio-button class="pol-radio-button" value="z">Female</mat-radio-button>
                 </mat-radio-group>   
             </div> 
-            <!-- </mat-form-field> -->
+            <div>
+                <mat-label>Profile privacy</mat-label>
+                <mat-radio-group ngDefaultControl formControlName="privacy"
+                aria-labelledby="pol-radio-group-label"
+                class="pol-radio-group">
+                    <mat-radio-button class="pol-radio-button" value="public">public</mat-radio-button>
+                    <mat-radio-button class="pol-radio-button" value="private">private</mat-radio-button>
+                </mat-radio-group>   
+            </div> 
         </div>
         <br>
         <app-center-container>

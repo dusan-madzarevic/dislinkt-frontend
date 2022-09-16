@@ -8,11 +8,19 @@ export const environment = {
   apiPost: 'posts',
   apiImage: 'images',
   apiComment: 'comments',
-  apiReg: 'register',
-  apiLogin: 'token',
-  apiUser: 'users/me'
+  // apiReg: 'register',
+  // apiLogin: 'token',
+  // apiUser: 'users/me'
 };
 
+export const environment1 = {
+  production: false,
+  baseUrl: 'http://localhost:8001',
+  apiReg: 'register',
+  apiLogin: 'token',
+  apiUser: 'users/me',
+  apiProfil: 'profile'
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
