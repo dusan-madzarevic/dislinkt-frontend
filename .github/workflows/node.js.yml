@@ -64,6 +64,8 @@ jobs:
           jf rt bce
           # Collect VCS details from git and add them to the build
           jf rt bag
+          jf rt dl artifacts/
+          jf rt u aether artifacts/
           # Publish build info
           jf rt bp
         
