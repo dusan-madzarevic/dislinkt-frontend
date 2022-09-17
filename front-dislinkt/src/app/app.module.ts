@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { DatePipe } from '@angular/common'
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ProfileEditComponent } from './home/profile-edit/profile-edit.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatRadioModule,
     MatInputModule,
     MatGridListModule,
+    MatButtonModule
   ],
   providers: [DatePipe, HttpClientModule,
     {

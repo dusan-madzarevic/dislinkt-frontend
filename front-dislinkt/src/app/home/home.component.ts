@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Post } from '../models/post';
+import { AuthenticationService } from '../services/authentication.service';
 import { PostService } from '../services/post.service';
 import { CreatePostComponent } from './create-post/create-post.component';
 
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(
     public router: Router,
     public postService: PostService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthenticationService
   ) { }
 
   guest: Boolean;
@@ -27,8 +29,19 @@ export class HomeComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.guest = true;
-    this.getPosts();
+    // this.guest = true;
+    // this.getPosts();
+
+    let user = this.authService.getUser();
+    if(!user){
+      this.guest = true;
+      console.log("neregistrovan korisnik");
+    }
+    else{
+      this.guest = false;
+      console.log("registrovan korisnik");
+      console.log(user.profile_id)
+    }
   }
   
   login(): void{
@@ -48,6 +61,10 @@ export class HomeComponent implements OnInit {
       (posts: Post[]) => {
       this.posts = posts;
     });
+  }
+
+  profile(): void {
+    this.router.navigate(['/profile']);
   }
   
 }

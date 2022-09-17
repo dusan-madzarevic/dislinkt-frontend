@@ -17,6 +17,7 @@ export class AuthenticationService {
   private readonly API_REG: string = `${environment1.baseUrl}/${environment1.apiReg}`;
   private readonly API_LOGIN: string = `${environment1.baseUrl}/${environment1.apiLogin}`;
   private readonly API_USER: string = `${environment1.baseUrl}/${environment1.apiUser}`;
+  private readonly API_USERS: string = `${environment1.baseUrl}/${environment1.apiUsers}`;
 
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -54,7 +55,7 @@ export class AuthenticationService {
     return this.http.get(this.API_USER)
         .subscribe((res:any)=>{
           console.log(res);
-          localStorage.setItem('user', res);
+          localStorage.setItem('user', JSON.stringify(res));
         })
   }
 
@@ -91,7 +92,7 @@ export class AuthenticationService {
   }
 
   getUser(){
-    return localStorage.getItem("user");
+    return JSON.parse(localStorage.getItem("user"));
   }
 
   getExpiration() {
@@ -104,6 +105,15 @@ export class AuthenticationService {
       }
   } 
 
+
+  editUser(user: User){
+    var headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    var userjson = JSON.stringify(user);
+    console.log(userjson);
+    return this.http.put<User>(`${this.API_USERS}/${user.id}`, userjson, {headers: headers}).pipe(
+      catchError(() => of(null))
+    );
+  }
 
 
   openSuccessSnackBar(message: string): void {

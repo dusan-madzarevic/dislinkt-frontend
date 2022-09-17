@@ -3,14 +3,14 @@
     <form [formGroup]="loginForm">
         <div [class.disabled]="loginPending">
             <mat-form-field>
-                <mat-label>Username</mat-label>
+                <mat-label>Email</mat-label>
                 <input 
                 matInput 
                 autocomplete="off"
                 formControlName="username" 
-                placeholder="Unesite email">
+                placeholder="Enter email">
                 <mat-error>
-                    Enter username!
+                    Enter email!
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
