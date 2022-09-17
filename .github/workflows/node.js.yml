@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.17.0
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: npm install --no-package-lock
@@ -40,23 +41,13 @@ jobs:
         run: npm run build
         working-directory: ./front-dislinkt
      
-      - name: Use .npmrc
-        uses: bduff9/use-npmrc@v1.1
-        if: github.event_name == 'push'
-        with:
-          dot-npmrc: ${{ secrets.DOT_NPMRC }}
-     
-      - name: Authorize
-        working-directory: ./front-dislinkt
-        if: github.event_name == 'push'
-        run:
-          npm adduser
-     
       - name: Publish
         working-directory: ./front-dislinkt
         if: github.event_name == 'push'
         run:
           npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
         
   sonarcloud:
