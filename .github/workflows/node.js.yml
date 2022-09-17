@@ -41,11 +41,15 @@ jobs:
         run: npm run build
         working-directory: ./front-dislinkt
      
+      - name: Authenticate
+        run: npm adduser --registry=https://dislinkt.jfrog.io/artifactory/api/npm/dislinkt-frontend-npm/
+        working-directory: ./front-dislinkt
+     
       - name: Publish
         working-directory: ./front-dislinkt
         if: github.event_name == 'push'
         run:
-          npm publish --registry https://dislinkt.jfrog.io/artifactory/api/npm/dislinkt-frontend-npm/
+          npm publish --registry=https://dislinkt.jfrog.io/artifactory/api/npm/dislinkt-frontend-npm/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
