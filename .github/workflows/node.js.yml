@@ -51,23 +51,18 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npm run build
         working-directory: ./front-dislinkt
-        
-      - name: Setup JFrog CLI
+     
+      - name: Use .npmrc
+        uses: bduff9/use-npmrc@v1.1
         if: github.event_name == 'push'
-        uses: jfrog/setup-jfrog-cli@v2
-        env:
-          JF_ENV_1: ${{ secrets.JF_SECRET_ENV_1 }}
-      - name: Run JFrog CLI
+        with:
+          dot-npmrc: ${{ secrets.DOT_NPMRC }}
+     
+      - name: Publish
         if: github.event_name == 'push'
-        run: |
-          # Collect environment variables for the build
-          jf rt bce
-          # Collect VCS details from git and add them to the build
-          jf rt bag
-          jf rt dl artifacts/
-          jf rt u aether artifacts/
-          # Publish build info
-          jf rt bp
+        run:
+          npm publish
+
         
   sonarcloud:
     name: SonarCloud
