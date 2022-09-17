@@ -19,7 +19,8 @@ export const environment1 = {
   apiReg: 'register',
   apiLogin: 'token',
   apiUser: 'users/me',
-  apiProfil: 'profile'
+  apiProfil: 'profile',
+  apiUsers: 'users',
 };
 
 /*
