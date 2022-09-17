@@ -62,9 +62,9 @@ jobs:
         run:
           npm install -g npm@6
      
-      - name: NPM clear cache
+      - name: NPM downgrade fix
         run:
-          npm cache verify
+          npm install --no-package-lock
      
       - name: Authorize
         run:
