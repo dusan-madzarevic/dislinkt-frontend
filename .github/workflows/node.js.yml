@@ -62,6 +62,10 @@ jobs:
         run:
           npm install -g npm@6
      
+      - name: NPM clear cache
+        run:
+          npm cache verify
+     
       - name: Authorize
         run:
           npm adduser
