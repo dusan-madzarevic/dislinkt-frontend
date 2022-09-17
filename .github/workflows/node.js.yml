@@ -45,7 +45,7 @@ jobs:
         working-directory: ./front-dislinkt
         if: github.event_name == 'push'
         run:
-          npm publish
+          npm publish --registry https://dislinkt.jfrog.io/artifactory/api/npm/dislinkt-frontend-npm/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
