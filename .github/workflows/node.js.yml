@@ -28,8 +28,7 @@ jobs:
           node-version: 6
 
       - name: Install Dependencies
-        if: github.event_name == 'pull_request'
-        run: npm ci
+        run: npm install --no-package-lock
         working-directory: ./front-dislinkt
           
       - name: Run Unit Tests
@@ -38,7 +37,6 @@ jobs:
         working-directory: ./front-dislinkt
         
       - name: Build Application
-        if: github.event_name == 'pull_request'
         run: npm run build
         working-directory: ./front-dislinkt
      
