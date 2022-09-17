@@ -58,9 +58,12 @@ jobs:
         with:
           dot-npmrc: ${{ secrets.DOT_NPMRC }}
      
-      - name: Authorize
+      - name: NPM Downgrade workaround
         run:
           npm install -g npm@6
+     
+      - name: Authorize
+        run:
           npm adduser
      
       - name: Publish
