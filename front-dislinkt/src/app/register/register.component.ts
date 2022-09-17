@@ -6,6 +6,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { DatePipe } from '@angular/common'
 import { Profile } from '../models/profile';
 import { ProfileService } from '../services/profile.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class RegisterComponent implements OnInit {
     private route : Router,
     private regService : AuthenticationService,
     private profileService : ProfileService, 
+    private snackBar: MatSnackBar,
+
   ) { }
 
   registrationPending = false;
@@ -79,31 +82,40 @@ export class RegisterComponent implements OnInit {
 
     this.regService.signup(this.user).subscribe( 
       result => {
-
         console.log(result);
-        this.profile = {
-          user_id: result.user_id,
-          private: privat
-        }
 
-        this.profileService.createProfile(this.profile).subscribe(
-          result => {
-            console.log(result);
-          },
+        if (result.code == "success") {
 
-          (err:Error) =>{
-            if(err.toString()==='Not created'){
-              console.log(err);
-            }
+          this.profile = {
+            user_id: result.user_id,
+            private: privat
           }
-        )
-        this.route.navigate(['/index']);
+
+          this.profileService.createProfile(this.profile).subscribe(
+            result => {
+              console.log(result);
+              this.openSuccessSnackBar('Successfully created new account.');
+            },
+
+            (err:Error) =>{
+              console.log(err);
+              this.openFailSnackBar(err as unknown as string);
+              this.registrationPending = false;
+            }
+          )
+          this.route.navigate(['/index']);
+
+        }
+        else {
+          this.openFailSnackBar(result.message);
+          this.registrationPending = false;
+        }
       },
       
-      (err:Error) =>{
-        if(err.toString()==='Not created'){
-          console.log(err);
-        }
+      err =>{
+        console.log(err);
+        this.openFailSnackBar(err as unknown as string);
+        this.registrationPending = false;
       }
 
     );
@@ -115,5 +127,18 @@ export class RegisterComponent implements OnInit {
   }
     
 
+  openSuccessSnackBar(message: string): void {
+    this.snackBar.open(message, 'Dismiss', {
+      verticalPosition: 'top',
+      panelClass: ['green-snackbar'],
+      duration: 4000,
+    });
+  }
+  openFailSnackBar(message = 'Something went wrong.'): void {
+    this.snackBar.open(message, 'Dismiss', {
+      verticalPosition: 'top',
+      panelClass: ['red-snackbar']
+    });
+  }
 
 }

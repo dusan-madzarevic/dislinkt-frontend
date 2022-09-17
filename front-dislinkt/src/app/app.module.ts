@@ -12,6 +12,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { DatePipe } from '@angular/common'
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     HttpClientModule,
     LayoutModule,
     MatRadioModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule,
   ],
   providers: [DatePipe, HttpClientModule,
     {
