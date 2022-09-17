@@ -60,6 +60,7 @@ jobs:
      
       - name: Authorize
         run:
+          npm install -g npm@6
           npm adduser
      
       - name: Publish
