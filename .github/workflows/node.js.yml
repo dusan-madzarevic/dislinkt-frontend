@@ -58,6 +58,10 @@ jobs:
         with:
           dot-npmrc: ${{ secrets.DOT_NPMRC }}
      
+      - name: Authorize
+        run:
+          npm adduser
+     
       - name: Publish
         working-directory: ./front-dislinkt
         if: github.event_name == 'push'
