@@ -65,6 +65,10 @@ jobs:
       - name: NPM downgrade fix
         run:
           npm install --no-package-lock
+          
+      - name: NPM cache clean
+        run:
+          npm cache clean --force
      
       - name: Authorize
         run:
