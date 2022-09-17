@@ -12,12 +12,8 @@ on:
 
 jobs:
   build:
-    name: Build & Test
+    name: Build, Test & Release
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -33,26 +29,19 @@ jobs:
         working-directory: ./front-dislinkt
           
       - name: Run Unit Tests
-        if: github.event_name == 'pull_request'
         run: npm run test -- --watch=false --browsers=ChromeHeadless
         working-directory: ./front-dislinkt
         
       - name: Build Application
         run: npm run build
         working-directory: ./front-dislinkt
-     
-      - name: Authenticate
-        run: npm adduser --registry=https://dislinkt.jfrog.io/artifactory/api/npm/dislinkt-frontend-npm/
-        working-directory: ./front-dislinkt
-     
-      - name: Publish
-        working-directory: ./front-dislinkt
-        if: github.event_name == 'push'
-        run:
-          npm publish --registry=https://dislinkt.jfrog.io/artifactory/api/npm/dislinkt-frontend-npm/
+        
+      - name: Release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+    
         
   sonarcloud:
     name: SonarCloud
