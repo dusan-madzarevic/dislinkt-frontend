@@ -59,18 +59,26 @@ jobs:
           dot-npmrc: ${{ secrets.DOT_NPMRC }}
      
       - name: NPM Downgrade workaround
+        working-directory: ./front-dislinkt
+        if: github.event_name == 'push'
         run:
           npm install -g npm@6
      
       - name: NPM downgrade fix
+        working-directory: ./front-dislinkt
+        if: github.event_name == 'push'
         run:
           npm install --no-package-lock
           
       - name: NPM cache clean
+        working-directory: ./front-dislinkt
+        if: github.event_name == 'push'
         run:
           npm cache clean --force
      
       - name: Authorize
+        working-directory: ./front-dislinkt
+        if: github.event_name == 'push'
         run:
           npm adduser
      
