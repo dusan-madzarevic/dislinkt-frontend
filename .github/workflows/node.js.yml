@@ -59,6 +59,7 @@ jobs:
           dot-npmrc: ${{ secrets.DOT_NPMRC }}
      
       - name: Publish
+        working-directory: ./front-dislinkt
         if: github.event_name == 'push'
         run:
           npm publish
