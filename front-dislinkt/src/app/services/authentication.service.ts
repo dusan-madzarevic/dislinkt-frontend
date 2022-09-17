@@ -7,6 +7,7 @@ import { environment, environment1 } from 'src/environments/environment';
 import { DateTime } from 'luxon';
 import { FormGroup } from '@angular/forms';
 import { Token } from '../models/token';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient, 
+    private snackBar: MatSnackBar,
     // private jwtUtilsService: JwtUtilsService, 
     // private jwtHelper : JwtHelperService
   ) { }
@@ -58,48 +60,64 @@ export class AuthenticationService {
 
 
       
-public setSession(authResult) {
-    let expireTime = DateTime.now().plus({minutes: authResult.expires_in_minutes})
-    
-    localStorage.setItem('access_token', authResult.access_token);
-    localStorage.setItem("expires_at", JSON.stringify(expireTime.toMillis()));
-}          
+  public setSession(authResult) {
+      let expireTime = DateTime.now().plus({minutes: authResult.expires_in_minutes})
+      
+      localStorage.setItem('access_token', authResult.access_token);
+      localStorage.setItem("expires_at", JSON.stringify(expireTime.toMillis()));
+  }          
 
-logout() {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("expires_at");
-    localStorage.removeItem("user");
-}
-
-public isLoggedIn() {
-  const expiration = localStorage.getItem("expires_at");
-  if(expiration != null){
-    return DateTime.now() < DateTime.fromMillis(JSON.parse(expiration));
-  }else{
-    return false;
+  logout() {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("expires_at");
+      localStorage.removeItem("user");
   }
-}
 
-isLoggedOut() {
-    return !this.isLoggedIn();
-}
-
-getToken(){
-  return localStorage.getItem("access_token");
-}
-
-getUser(){
-  return localStorage.getItem("user");
-}
-
-getExpiration() {
+  public isLoggedIn() {
     const expiration = localStorage.getItem("expires_at");
     if(expiration != null){
-      const expiresAt = JSON.parse(expiration);  
-      return DateTime.fromMillis(expiresAt);
+      return DateTime.now() < DateTime.fromMillis(JSON.parse(expiration));
     }else{
-      return "error";
+      return false;
     }
-} 
+  }
+
+  isLoggedOut() {
+      return !this.isLoggedIn();
+  }
+
+  getToken(){
+    return localStorage.getItem("access_token");
+  }
+
+  getUser(){
+    return localStorage.getItem("user");
+  }
+
+  getExpiration() {
+      const expiration = localStorage.getItem("expires_at");
+      if(expiration != null){
+        const expiresAt = JSON.parse(expiration);  
+        return DateTime.fromMillis(expiresAt);
+      }else{
+        return "error";
+      }
+  } 
+
+
+
+  openSuccessSnackBar(message: string): void {
+    this.snackBar.open(message, 'Dismiss', {
+      verticalPosition: 'top',
+      panelClass: ['green-snackbar'],
+      duration: 4000,
+    });
+  }
+  openFailSnackBar(message = 'Something went wrong.'): void {
+    this.snackBar.open(message, 'Dismiss', {
+      verticalPosition: 'top',
+      panelClass: ['red-snackbar']
+    });
+  }
 
 }
