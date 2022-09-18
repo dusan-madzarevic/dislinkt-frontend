@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
         this.userProfile = response;
         this.imageService.getImage(this.userProfile.picture).subscribe(
           (blob: Blob) => {
-            var objectURL = URL.createObjectURL(blob);
+            let objectURL = URL.createObjectURL(blob);
             console.log(objectURL);
             this.profilePicture = objectURL;
         });

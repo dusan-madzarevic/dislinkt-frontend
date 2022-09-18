@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
-import { environment, environment1 } from 'src/environments/environment';
+import { environment1 } from 'src/environments/environment';
 import { DateTime } from 'luxon';
-import { FormGroup } from '@angular/forms';
 import { Token } from '../models/token';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -38,7 +37,7 @@ export class AuthenticationService {
 
   signup(user: User) {
     var headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-    var userjson = JSON.stringify(user);
+    let userjson = JSON.stringify(user);
     console.log(userjson);
     return this.http.post<User>(this.API_REG, userjson, {headers: headers}).pipe(
       catchError(() => of(null))
@@ -107,8 +106,8 @@ export class AuthenticationService {
 
 
   editUser(user: User){
-    var headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-    var userjson = JSON.stringify(user);
+    let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let userjson = JSON.stringify(user);
     console.log(userjson);
     return this.http.put<User>(`${this.API_USERS}/${user.id}`, userjson, {headers: headers}).pipe(
       catchError(() => of(null))

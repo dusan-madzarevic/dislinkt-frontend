@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { ImageService } from 'src/app/services/image.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -29,8 +28,7 @@ export class ProfileEditComponent implements OnInit {
   ) { }
 
   profileForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required,
-    Validators.pattern(new RegExp('\\S'))]),
+    email: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     ime: new FormControl(''),
     prezime: new FormControl(''),
@@ -57,7 +55,7 @@ export class ProfileEditComponent implements OnInit {
       response => {
         console.log(response);
         this.userProfile = response;
-        var privacy = "public";
+        let privacy = "public";
         if (this.userProfile.private) privacy = "private";
         this.profileForm.patchValue({
           'privacy': privacy,
@@ -110,7 +108,6 @@ export class ProfileEditComponent implements OnInit {
         console.log(result);
         if (result.code == "success") {
 
-          // this.authService.setLoggedUser();
           localStorage.setItem('user', JSON.stringify(this.newUser));
 
           this.newProfile = {
@@ -137,7 +134,6 @@ export class ProfileEditComponent implements OnInit {
         else {
           this.openFailSnackBar(result.message);
         }
-        // this.route.navigate(['/profile']);
       },
       err => {
         console.log(err);
