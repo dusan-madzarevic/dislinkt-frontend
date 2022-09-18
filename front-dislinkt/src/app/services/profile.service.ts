@@ -49,4 +49,14 @@ export class ProfileService {
     );
   }
 
+
+  addEducation(education: string) {
+    let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let educationjson = JSON.stringify(education);
+    console.log(educationjson);
+    return this.http.put<Profile>(`${this.API_PROFIL}/addEducation`, educationjson, {headers: headers}).pipe(
+      catchError(() => of(null))
+    );
+  }
+
 }

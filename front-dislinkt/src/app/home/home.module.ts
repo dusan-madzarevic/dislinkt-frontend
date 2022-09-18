@@ -5,7 +5,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { AppModule } from '../app.module';
 import { PostComponent } from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
-import { ProfileComponent } from './profile/profile.component';
+import { EducationDialog, ProfileComponent } from './profile/profile.component';
 
 
 
@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
     PostComponent,
     CreatePostComponent,
     ProfileComponent,
+    EducationDialog
   ],
   imports: [
     CommonModule,

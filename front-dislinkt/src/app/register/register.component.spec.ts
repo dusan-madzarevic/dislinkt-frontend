@@ -4,6 +4,7 @@ import { RegisterComponent } from './register.component';
 import { HttpClient } from '@angular/common/http';
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -14,7 +15,7 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RegisterComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule ]
+      imports: [ HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule, MatSnackBarModule ]
     })
     .compileComponents();
   });
