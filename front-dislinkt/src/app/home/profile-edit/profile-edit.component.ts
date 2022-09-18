@@ -41,31 +41,34 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
-    this.profileForm.patchValue({
-      'email': this.user.email,
-      'username': this.user.username,
-      'ime': this.user.ime,
-      'prezime': this.user.prezime,
-      'telefon': this.user.telefon,
-      'datumRodjenja': this.user.datumRodjenja,
-      'pol': this.user.pol,
-    })
+    if (this.user != null){
+      this.profileForm.patchValue({
+        'email': this.user.email,
+        'username': this.user.username,
+        'ime': this.user.ime,
+        'prezime': this.user.prezime,
+        'telefon': this.user.telefon,
+        'datumRodjenja': this.user.datumRodjenja,
+        'pol': this.user.pol,
+      })
+    
 
-    this.profileService.getProfile(this.user.profile_id).subscribe(
-      response => {
-        console.log(response);
-        this.userProfile = response;
-        let privacy = "public";
-        if (this.userProfile.private) privacy = "private";
-        this.profileForm.patchValue({
-          'privacy': privacy,
-          'description': this.userProfile.description
-        })
-      },
-      err => {
-        console.log(err);
-      }
-    )
+      this.profileService.getProfile(this.user.profile_id).subscribe(
+        response => {
+          console.log(response);
+          this.userProfile = response;
+          let privacy = "public";
+          if (this.userProfile.private) privacy = "private";
+          this.profileForm.patchValue({
+            'privacy': privacy,
+            'description': this.userProfile.description
+          })
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
 
   }
 

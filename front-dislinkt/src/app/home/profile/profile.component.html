@@ -4,28 +4,49 @@
         <h1>{{user.username}}</h1>
     </div>
       
-    <div class="clearfix">
-        <div class="content-left">
-            <img class="profile" src="assets/plazica.jpg" alt="Profile picture"/>
+    <div class="flex-container">
 
+        <div class="flex-child image">
+            <img class="profile" src="assets/plazica.jpg" alt="Profile picture"/>
+        </div>
+        
+        <div class="flex-child">
             <p class="name">{{user.ime + " " + user.prezime}}</p>
             <p>E-mail: {{user.email}}</p>
             <p>Phone: {{user.telefon}}</p>
             <p>{{user.pol}}</p>
             <p>{{userProfile.description}}</p>
+        </div>
 
+        <div class="flex-child button">
             <button mat-raised-button color="basic" (click)="editProfile()">
-                <mat-icon>edit</mat-icon>
+                <mat-icon>edit</mat-icon> Edit profile
             </button>
-            
         </div>
-      
-        <div class="content-right">
-
-            
-        </div>
+        
     </div>
 
+    <mat-divider></mat-divider>
+
+      
+    <div class="flex-container">
+
+        <div class="flex-child">
+
+            <p class="my-heading">Education & Experience</p>
+            <button mat-raised-button color="basic" (click)="openEducationDialog()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        
+        <div class="flex-child">
+            <p class="my-heading">Skills & Interests</p>
+            <button mat-raised-button color="basic" (click)="openSkillDialog()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        
+    </div>
 
 <mat-divider></mat-divider>
 
@@ -33,4 +54,6 @@
     Postovi
 </div>
 
+
 </div>
+
