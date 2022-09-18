@@ -29,8 +29,6 @@ export class HomeComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // this.guest = true;
-    // this.getPosts();
 
     let user = this.authService.getUser();
     if(!user){
