@@ -5,6 +5,17 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/github",
+        {
+          "assets":[
+            {
+              "path":"dist.zip",
+              "label":"dislinkt-front-${nextRelease.gitTag}.zip"
+            }
+          ]
+        }
+      ],
       "@semantic-release/changelog",
       [
         "@semantic-release/npm",
@@ -12,12 +23,7 @@
           "npmPublish": true
         }
       ],
-      "@semantic-release/git",
-      [
-        "@semantic-release/exec",
-        {
-          "publishCmd": "npm run bump-versions"
-        }
-      ]
-    ]
+      "@semantic-release/git"
+    ],
+    "repositoryUrl": "https://github.com/dusan-madzarevic/dislinkt-frontend"
   }
