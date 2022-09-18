@@ -80,6 +80,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            name/app
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
       # setup Docker buld action
       - name: Set up Docker Buildx
         id: buildx
@@ -96,10 +113,8 @@ jobs:
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./front-dislinkt
-          # Note: tags has to be all lower-case
-          tags: |
-            ducom98/dislinkt-frontend.nodejs.simple:latest 
-          # build on feature branches, push only on main branch
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/development' }}
 
       - name: Image digest
