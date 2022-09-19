@@ -19,8 +19,11 @@
         </div>
 
         <div class="flex-child button">
-            <button mat-raised-button color="basic" (click)="editProfile()">
+            <button mat-raised-button class="profile-button" color="basic" (click)="editProfile()">
                 <mat-icon>edit</mat-icon> Edit profile
+            </button>
+            <button mat-raised-button class="profile-button" color="basic" (click)="changePassword()">
+                <mat-icon>edit</mat-icon> Change password
             </button>
         </div>
         
@@ -61,10 +64,28 @@
         </div>
         
         <div class="flex-child">
-            <p class="my-heading">Skills & Interests</p>
-            <button mat-raised-button color="basic" (click)="openSkillDialog()">
-                <mat-icon>edit</mat-icon>
-            </button>
+            <mat-list>
+                <div mat-subheader>
+                    <p class="my-heading">Skills & Interests</p>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="openSkillDialog()">
+                            <mat-icon>add</mat-icon> Add skill
+                        </button>
+                    </div>
+                    
+                </div>
+                <mat-list-item *ngFor="let skill of skillList">
+                    <div>
+                        <div mat-line>{{skill.skillname}}</div>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="deleteSkill(skill.id)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                    
+                </mat-list-item>
+            </mat-list>
+
         </div>
         
     </div>

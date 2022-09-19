@@ -98,6 +98,11 @@ button {
     float: right;
 }
 
+.profile-button {
+    float: left;
+    margin: 5px;
+}
+
 .mat-subheader {
     display: flex;
 }
