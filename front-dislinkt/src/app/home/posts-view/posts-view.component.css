@@ -1,0 +1,24 @@
+.search{
+    width: 100%;
+}
+
+.postButton{
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    background-color: #25357c;
+
+}
+
+.inline{
+    display: inline-block;
+}
+
+div.searchResult{
+    overflow-y: hidden;
+}
+
+button {
+    background-color: #25357c;
+    margin-right: 5px;
+}
