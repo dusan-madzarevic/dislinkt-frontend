@@ -12,22 +12,6 @@
         </div>
     </div>
     <div class="content">
-        <button class="postButton" mat-fab (click)="newPost()"><mat-icon>add</mat-icon></button>
-        <app-center-container>
-            <form [formGroup]="searchForm" class="search">
-                <div [class.disabled]="searchPending">
-                    <mat-icon>search</mat-icon>
-                    <mat-form-field>
-                        <mat-label>Search profile</mat-label>
-                        <input 
-                        matInput 
-                        autocomplete="off"
-                        formControlName="profile" 
-                        placeholder="Enter profile name">
-                    </mat-form-field>
-                </div>
-            </form>
-        </app-center-container>
-        <app-post *ngFor="let post of posts" [post]= "post"></app-post>
+        <router-outlet></router-outlet>
     </div>
 </div>

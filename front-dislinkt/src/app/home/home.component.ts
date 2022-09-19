@@ -22,11 +22,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   guest: Boolean;
-  posts: Post[];
-  searchPending = false;
-  searchForm: FormGroup = new FormGroup({
-    profile: new FormControl('', [Validators.pattern(new RegExp('\\S'))])
-  });
 
   ngOnInit(): void {
 
@@ -40,6 +35,7 @@ export class HomeComponent implements OnInit {
       console.log("registrovan korisnik");
       console.log(user.profile_id)
     }
+    this.router.navigate(['/posts']);
   }
   
   login(): void{
@@ -50,19 +46,17 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  newPost(): void{
-    this.dialog.open(CreatePostComponent);
-  }
-
-  getPosts(): void{
-    this.postService.fetchPosts().subscribe(
-      (posts: Post[]) => {
-      this.posts = posts;
-    });
-  }
-
   profile(): void {
     this.router.navigate(['/profile']);
+  }
+
+  requests(): void{
+    this.router.navigate(['/requests']);
+  }
+
+  signOut(){
+    this.authService.logout();
+    window.location.reload();
   }
   
 }
