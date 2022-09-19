@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { RouterTestingModule } from "@angular/router/testing";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PostsViewComponent } from './posts-view/posts-view.component';
 
 
 describe('HomeComponent', () => {
@@ -16,8 +17,11 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
-      imports: [ HttpClientTestingModule, RouterTestingModule, MatDialogModule, MatSnackBarModule ]
+      declarations: [ HomeComponent , PostsViewComponent],
+      imports: [ HttpClientTestingModule, RouterTestingModule, MatDialogModule, MatSnackBarModule ,
+        RouterTestingModule.withRoutes(
+          [{path: 'posts', component: PostsViewComponent}],
+        )]
     })
     .compileComponents();
   });
