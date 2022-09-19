@@ -33,10 +33,31 @@
 
         <div class="flex-child">
 
-            <p class="my-heading">Education & Experience</p>
-            <button mat-raised-button color="basic" (click)="openEducationDialog()">
-                <mat-icon>edit</mat-icon>
-            </button>
+            <!-- <p class="my-heading">Education & Experience</p> -->
+            <mat-list>
+                <div mat-subheader>
+                    <p class="my-heading">Education & Experience</p>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="openEducationDialog()">
+                            <mat-icon>add</mat-icon> Add education
+                        </button>
+                    </div>
+                    
+                </div>
+                <mat-list-item *ngFor="let education of educationList">
+                    <div>
+                        <div mat-line>{{education.degree}}</div>
+                        <div mat-line>{{education.school}}</div>
+                        <div mat-line> {{education.start + " - " + education.end}} </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="deleteEducation(education.id)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                    
+                </mat-list-item>
+            </mat-list>
+            
         </div>
         
         <div class="flex-child">

@@ -16,14 +16,17 @@ const routes: Routes = [
         component: PostsViewComponent
       },
       {
-        path: `${PROFILE_PATH}/:id`,
+        path: PROFILE_PATH,
         component: ProfileComponent
       },
       {
-        path: "profile",
+        path: `${PROFILE_PATH}/edit`,
         component: ProfileEditComponent
-      }
-
+      },
+      {
+        path: `${PROFILE_PATH}/:id`,
+        component: ProfileComponent
+      },
 
     ]
 },];

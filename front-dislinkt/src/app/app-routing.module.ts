@@ -20,14 +20,14 @@ const routes: Routes = [
     path: REGISTER_PATH,
     component: RegisterComponent
   },
-  {
-    path: PROFILE_PATH,
-    component: ProfileComponent
-  },
-  {
-    path: PROFILE_PATH+"/edit",
-    component: ProfileEditComponent
-  },
+  // {
+  //   path: PROFILE_PATH,
+  //   component: ProfileComponent
+  // },
+  // {
+  //   path: PROFILE_PATH+"/edit",
+  //   component: ProfileEditComponent
+  // },
   {
     path: '**',
     pathMatch: 'full',

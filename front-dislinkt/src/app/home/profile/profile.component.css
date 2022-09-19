@@ -97,3 +97,11 @@ img.profile {
 button {
     float: right;
 }
+
+.mat-subheader {
+    display: flex;
+}
+
+.button-div {
+    flex: 1;
+}
