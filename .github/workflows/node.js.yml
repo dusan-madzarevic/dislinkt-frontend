@@ -10,7 +10,7 @@ on:
      - main
      - development
     tags:
-      - '**'
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -92,10 +92,11 @@ jobs:
             ducom98/dislinkt-frontend
           # generate Docker tags based on the following events/attributes
           tags: |
+            type=ref,event=branch
+            type=ref,event=tag
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-
       # setup Docker buld action
       - name: Set up Docker Buildx
         if: github.event_name != 'pull_request'
