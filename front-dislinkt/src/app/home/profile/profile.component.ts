@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Education } from 'src/app/models/education';
+import { PasswordChange } from 'src/app/models/password-change';
 import { Profile } from 'src/app/models/profile';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
@@ -23,6 +24,13 @@ export interface SkillDialogData {
   profile_id: string
 }
 
+export interface PasswordDialogData {
+  oldPassword: string;
+  newPassword: string;
+  user_id: string
+}
+
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -33,6 +41,7 @@ export class ProfileComponent implements OnInit {
   user!: User;
   profilePicture: any;
   educationList: Education[] = [];
+  skillList: Skill[] = [];
 
   constructor(
     private authService : AuthenticationService,
@@ -52,6 +61,7 @@ export class ProfileComponent implements OnInit {
         response => {
           console.log(response);
           this.userProfile = response;
+
           this.profileService.getEducation(this.userProfile.id).subscribe(
             result => {
               console.log(result);
@@ -63,7 +73,22 @@ export class ProfileComponent implements OnInit {
             err => {
               console.log(err);
             }
+          );
+
+          this.profileService.getSkills(this.userProfile.id).subscribe(
+            result => {
+              console.log(result);
+              result.forEach((element : Skill) => {
+                console.log(element);
+                this.skillList.push(element);
+              });
+            },
+            err => {
+              console.log(err);
+            }
           )
+
+
           this.imageService.getImage(this.userProfile.picture).subscribe(
             (blob: Blob) => {
               let objectURL = URL.createObjectURL(blob);
@@ -80,8 +105,19 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  editProfile(){
+  editProfile() {
     this.route.navigate(['/profile/edit']);
+  }
+
+  changePassword() {
+    const dialogRef = this.dialog.open(PasswordDialog, {
+      width: '300px',
+      data: {user_id: this.user.id},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   deleteEducation(id: string){
@@ -97,6 +133,21 @@ export class ProfileComponent implements OnInit {
     window.location.reload();
   }
 
+
+  deleteSkill(id: string){
+    console.log(id);
+    this.profileService.deleteSkill(id).subscribe(
+      response => {
+        console.log(response);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    window.location.reload();
+  }
+
+
   openEducationDialog(): void {
     const dialogRef = this.dialog.open(EducationDialog, {
       width: '300px',
@@ -109,14 +160,14 @@ export class ProfileComponent implements OnInit {
   }
 
   openSkillDialog(): void {
-  //   const dialogRef = this.dialog.open(SkillDialog, {
-  //     width: '300px',
-  //     data: {profile_id: this.userProfile.id},
-  //   });
+    const dialogRef = this.dialog.open(SkillDialog, {
+      width: '300px',
+      data: {profile_id: this.userProfile.id},
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //   });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
@@ -171,37 +222,73 @@ export class EducationDialog {
 
 
 
-// @Component({
-//   selector: 'skill-dialog',
-//   templateUrl: 'skill-dialog.html',
-// })
-// export class SkillDialog {
-//   skill: Skill;
-//   constructor(
-//     public dialogRef: MatDialogRef<SkillDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: SkillDialogData,
-//     private profileService : ProfileService,
-//   ) {}
+@Component({
+  selector: 'skill-dialog',
+  templateUrl: 'skill-dialog.html',
+})
+export class SkillDialog {
+  skill: Skill;
+  constructor(
+    public dialogRef: MatDialogRef<SkillDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: SkillDialogData,
+    private profileService : ProfileService,
+  ) {}
 
-//   cancel(): void {
-//     this.dialogRef.close();
-//   }
+  cancel(): void {
+    this.dialogRef.close();
+  }
 
-//   addSkill() {
-//     this.skill = {
-//       skillname: this.data.skillname,
-//       profile_id: this.data.profile_id
-//     }
-//     this.profileService.addSkill(this.skill).subscribe(
-//       result => {
-//         console.log(result);
-//         if(result.code == "success") {
-//           this.dialogRef.close();
-//         }
-//       },
-//       err => {
-//         console.log(err);
-//       }
-//     )
-//   }
-//}
+  addSkill() {
+    this.skill = {
+      skillname: this.data.skillname,
+      profile_id: this.data.profile_id
+    }
+    this.profileService.addSkill(this.skill).subscribe(
+      result => {
+        console.log(result);
+        if(result.code == "success") {
+          this.dialogRef.close();
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+}
+
+@Component({
+  selector: 'password-dialog',
+  templateUrl: 'password-dialog.html',
+})
+export class PasswordDialog {
+  password: PasswordChange;
+  constructor(
+    public dialogRef: MatDialogRef<SkillDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: PasswordDialogData,
+    private profileService : ProfileService,
+  ) {}
+
+  cancel(): void {
+    this.dialogRef.close();
+  }
+
+  save() {
+    this.password = {
+      user_id: this.data.user_id,
+      old: this.data.oldPassword,
+      new: this.data.newPassword
+    }
+    this.profileService.changePassword(this.password).subscribe(
+      result => {
+        console.log(result);
+        if(result.code == "success") {
+          this.dialogRef.close();
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+}

@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import {of } from 'rxjs';
 import { Education } from '../models/education';
 import { Skill } from '../models/skill';
+import { PasswordChange } from '../models/password-change';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import { Skill } from '../models/skill';
 export class ProfileService {
   
   private readonly API_PROFIL: string = `${environment1.baseUrl}/${environment1.apiProfil}`;
+  private readonly API_USER: string = `${environment1.baseUrl}/user`;
 
   constructor(
     private http: HttpClient, 
@@ -83,8 +85,33 @@ export class ProfileService {
   addSkill(skill: Skill) {
     let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
     let skilljson = JSON.stringify(skill);
-    console.log(skill);
-    return this.http.post<Skill>(`${this.API_PROFIL}/addSkill`, skilljson, {headers: headers}).pipe(
+    console.log(skilljson);
+    return this.http.post<Skill>(`${this.API_PROFIL}/skills`, skilljson, {headers: headers}).pipe(
+      catchError(() => of(null))
+    );
+  }
+
+  getSkills(profile_id: number) {
+    let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get(`${this.API_PROFIL}/${profile_id}/skills`, {headers: headers}).pipe(
+      map((data: any) => {
+        console.log(data);
+        return data;
+      }
+    ));
+  }
+
+  deleteSkill(skill_id: string) {
+    return this.http.delete(`${this.API_PROFIL}/skills/${skill_id}`).pipe(
+      catchError(() => of(null))
+    );
+  }
+
+  changePassword(password: PasswordChange) {
+    let headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let passwordjson = JSON.stringify(password);
+    console.log(passwordjson);
+    return this.http.post<PasswordChange>(`${this.API_USER}/password`, password, {headers: headers}).pipe(
       catchError(() => of(null))
     );
   }
