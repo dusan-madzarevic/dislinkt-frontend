@@ -21,4 +21,17 @@ export class PostService {
     }));
   }
 
+  fetchUserPosts(user_id: number): Observable<any> {
+    return this.http.get(`${this.API_POST}/${user_id}`).pipe(map((data: any) => {
+      return data;
+    }));
+  }
+
+
+  fetchFollowerPosts(profile_id): Observable<any> {
+    return this.http.get(`${this.API_POST}/following/${profile_id}`).pipe(map((data: any) => {
+      return data;
+    }));
+  }
+
 }
