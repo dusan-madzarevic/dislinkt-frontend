@@ -10,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   {
     path: HOME_PATH,
-    component: HomeComponent
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: LOGIN_PATH,
@@ -27,10 +27,6 @@ const routes: Routes = [
   {
     path: PROFILE_PATH+"/edit",
     component: ProfileEditComponent
-  },
-  {
-    path: HOME_PATH,
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: '**',
