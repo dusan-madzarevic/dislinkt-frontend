@@ -121,6 +121,7 @@ jobs:
           context: ./front-dislinkt
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          push: true
 
       - name: Image digest
         if: github.event_name != 'pull_request'
