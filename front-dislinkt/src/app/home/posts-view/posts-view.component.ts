@@ -79,6 +79,13 @@ export class PostsViewComponent implements OnInit {
   }
 
   searchUsers(){
+    this.search = true;
+    this.userService.search_users(this.searchForm.get('profile').value).subscribe(
+      (users: User[]) => {
+        this.foundUsers = users;
+        console.log(this.foundUsers);
+      }
+    );
   }
 
   notSearch(){
