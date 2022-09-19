@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       (token: Token) => {
         if(token){
           /** get currently logged user */
+          console.log("test");
           this.authService.setSession(token);
           this.authService.setLoggedUser();
           this.loginPending = false;
