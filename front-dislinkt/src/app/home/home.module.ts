@@ -5,7 +5,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { AppModule } from '../app.module';
 import { PostComponent } from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
-import { EducationDialog, ProfileComponent } from './profile/profile.component';
+import { EducationDialog, PasswordDialog, ProfileComponent, SkillDialog } from './profile/profile.component';
 import { PostsViewComponent } from './posts-view/posts-view.component';
 import { HomeRoutingModule } from './home-routing.module';
 
@@ -18,7 +18,9 @@ import { HomeRoutingModule } from './home-routing.module';
     CreatePostComponent,
     ProfileComponent,
     EducationDialog,
-    PostsViewComponent
+    PostsViewComponent,
+    SkillDialog,
+    PasswordDialog
   ],
   imports: [
     CommonModule,
