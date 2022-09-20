@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
-import { environment1 } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import { DateTime } from 'luxon';
 import { Token } from '../models/token';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,10 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AuthenticationService {
 
-  private readonly API_REG: string = `${environment1.baseUrl}/${environment1.apiReg}`;
-  private readonly API_LOGIN: string = `${environment1.baseUrl}/${environment1.apiLogin}`;
-  private readonly API_USER: string = `${environment1.baseUrl}/${environment1.apiUser}`;
-  private readonly API_USERS: string = `${environment1.baseUrl}/${environment1.apiUsers}`;
+  private readonly API_REG: string = `${environment.postUrl}/${environment.apiReg}`;
+  private readonly API_LOGIN: string = `${environment.postUrl}/${environment.apiLogin}`;
+  private readonly API_USER: string = `${environment.postUrl}/${environment.apiUser}`;
+  private readonly API_USERS: string = `${environment.postUrl}/${environment.apiUsers}`;
+  readonly STORAGE_KEY = 'auth';
+  readonly PROFILE_KEY = 'profile';
+
 
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -50,16 +53,22 @@ export class AuthenticationService {
     );
   }
 
-  setLoggedUser() {
-    return this.http.get(this.API_USER)
-        .subscribe((res:any)=>{
-          console.log(res);
-          localStorage.setItem('user', JSON.stringify(res));
-        })
+  getLoggedUser(): Observable<User> {
+    // return this.http.get(this.API_USER)
+    //     .subscribe((res:any)=>{
+    //       console.log(res);
+    //       localStorage.setItem('user', JSON.stringify(res));
+    //     })
+    return this.http.get(`${this.API_USER}`).pipe(
+      catchError(() => of(null))
+    );
+  }
+
+  setLoggedUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
 
-      
   public setSession(authResult) {
       let expireTime = DateTime.now().plus({minutes: authResult.expires_in_minutes})
       
@@ -72,6 +81,7 @@ export class AuthenticationService {
       localStorage.removeItem("expires_at");
       localStorage.removeItem("user");
   }
+
 
   public isLoggedIn() {
     const expiration = localStorage.getItem("expires_at");
@@ -128,5 +138,24 @@ export class AuthenticationService {
       panelClass: ['red-snackbar']
     });
   }
+
+
+  saveUser(profile: User): void{
+    localStorage.setItem(this.PROFILE_KEY, JSON.stringify(profile));
+
+  }
+  saveToken(token: Token): void{
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(token));
+  }
+
+  deleteUser(): void{
+    console.log(localStorage);
+    localStorage.removeItem(this.STORAGE_KEY);
+    localStorage.removeItem(this.PROFILE_KEY);
+  }
+
+  // getUser(): User{
+  //   return JSON.parse(localStorage.getItem(this.PROFILE_KEY));
+  // }
 
 }

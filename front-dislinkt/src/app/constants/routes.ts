@@ -3,4 +3,5 @@ export const HOME_PATH = '';
 export const REGISTER_PATH = 'register';
 export const PROFILE_PATH = 'profile';
 export const POST_PATH='posts';
+export const PROFILES_PATH='profiles'
 

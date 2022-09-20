@@ -4,7 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SNACKBAR_CLOSE, SNACKBAR_ERROR_OPTIONS } from '../constants/snackbar';
 import { Token } from '../models/token';
+import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    // public userService: UserService,
   ) { }
 
   loginPending = false;
@@ -41,14 +44,37 @@ export class LoginComponent implements OnInit {
       formData.append(formControlName, this.loginForm.get(formControlName).value);
     });
     this.authService.login(formData).subscribe(
-      (token: Token) => {
+      async (token: Token) => {
         if(token){
           /** get currently logged user */
           console.log("test");
           this.authService.setSession(token);
-          this.authService.setLoggedUser();
-          this.loginPending = false;
-          this.router.navigate(['/']);
+          this.authService.getLoggedUser().subscribe(
+            result => {
+              this.authService.setLoggedUser(result);
+              this.loginPending = false;
+              this.router.navigate(['/']);
+            },
+            error => {
+              console.log(error);
+            }
+          )
+         
+          // this.ngOnInit();
+          // this.authService.saveToken(token);
+          //   this.userService.get_User().subscribe(
+          //     (user: User) => {
+          //       if (user){
+          //         console.log(token);
+          //         console.log(user);
+          //         this.authService.saveUser(user);
+          //         this.router.navigate(['/']);
+          //       }
+          //       else{
+          //         this.snackBar.open("Pogresni email ili lozinka!", SNACKBAR_CLOSE, SNACKBAR_ERROR_OPTIONS);
+          //       }
+          //     }
+          //   );
         }
         else{
           this.loginPending = false;

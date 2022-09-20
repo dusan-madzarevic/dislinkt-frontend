@@ -1,6 +1,15 @@
-<div class="card">
+<div class="all" (click)="redirect()">
+  <div class="card" *ngIf="!small">
     <img class="profile" src="assets/plazica.jpg"/>
     <div>
-      <div class="name">{{name}} {{surname}}<br><div class="date">{{date}}</div></div>
+    <div class="name">{{name}} {{surname}}<br><div class="date">{{date}}</div></div>
     </div>
+  </div>
+  <div class="card" *ngIf="small">
+    <img class="small" src="assets/plazica.jpg"/>
+    <div>
+    <div class="small">{{name}} {{surname}}<br><div class="date">{{date}}</div></div>
+    </div>
+  </div>
+
 </div>

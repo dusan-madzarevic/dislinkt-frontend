@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment1 } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import { Profile } from '../models/profile';
 import { catchError, map } from 'rxjs/operators';
 import {of } from 'rxjs';
@@ -14,8 +14,8 @@ import { PasswordChange } from '../models/password-change';
 })
 export class ProfileService {
   
-  private readonly API_PROFIL: string = `${environment1.baseUrl}/${environment1.apiProfil}`;
-  private readonly API_USER: string = `${environment1.baseUrl}/user`;
+  private readonly API_PROFIL: string = `${environment.postUrl}/${environment.apiProfil}`;
+  private readonly API_USER: string = `${environment.postUrl}/user`;
 
   constructor(
     private http: HttpClient, 

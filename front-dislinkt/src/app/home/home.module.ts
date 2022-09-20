@@ -8,6 +8,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { EducationDialog, PasswordDialog, ProfileComponent, SkillDialog } from './profile/profile.component';
 import { PostsViewComponent } from './posts-view/posts-view.component';
 import { HomeRoutingModule } from './home-routing.module';
+import { Profile2Component } from './profile2/profile2.component';
 
 
 
@@ -20,7 +21,8 @@ import { HomeRoutingModule } from './home-routing.module';
     EducationDialog,
     PostsViewComponent,
     SkillDialog,
-    PasswordDialog
+    PasswordDialog,
+    Profile2Component
   ],
   imports: [
     CommonModule,

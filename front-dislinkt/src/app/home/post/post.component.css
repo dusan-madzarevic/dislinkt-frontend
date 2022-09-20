@@ -11,5 +11,16 @@ mat-icon{
     cursor: pointer;
 }
 
+input.comment{
+    width: 300px;
+}
 
-
+textarea{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    padding: 1em;
+    resize: none;
+    width: 300px;
+    min-height: 50px;
+    border: none;
+    outline: none;
+}

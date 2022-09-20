@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { POST_PATH, PROFILE_PATH } from '../constants/routes';
+import { POST_PATH, PROFILES_PATH, PROFILE_PATH } from '../constants/routes';
 import { HomeComponent } from './home.component';
 import { PostsViewComponent } from './posts-view/posts-view.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile.component';
+import { Profile2Component } from './profile2/profile2.component';
 
 const routes: Routes = [
   {
@@ -24,8 +25,8 @@ const routes: Routes = [
         component: ProfileEditComponent
       },
       {
-        path: `${PROFILE_PATH}/:id`,
-        component: ProfileComponent
+        path: `${PROFILES_PATH}/:id`,
+        component: Profile2Component
       },
 
     ]

@@ -1,0 +1,11 @@
+img.profilepic {
+    height: 100px;
+    max-width: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+ }
+
+div.all{
+    align-items: center;
+}

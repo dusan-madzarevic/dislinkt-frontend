@@ -35,6 +35,7 @@ export class PostsViewComponent implements OnInit {
 
   ngOnInit(): void {
     let user = this.authService.getUser();
+    console.log(user);
     if(!user){
       this.guest = true;
       console.log("neregistrovan korisnik");

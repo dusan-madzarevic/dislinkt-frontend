@@ -1,0 +1,10 @@
+<div class="all">
+    <img class="profilepic" src="assets/plazica.jpg">
+    <p>{{name}} {{surname}}</p>
+    <div *ngIf="!guest">
+        <button class="follow" mat-raised-button color="primary" (click)="follow()">{{state}}</button>
+    </div>
+    <br>
+    <br>
+    <app-post *ngFor="let post of posts" [post]= "post"></app-post>
+</div>
