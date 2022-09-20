@@ -41,7 +41,7 @@ jobs:
         working-directory: ./front-dislinkt
         
       - name: Zip dist folder
-        run: tar -c dist.tar.gz dist
+        run: tar -cfv dist.tar.gz dist
         working-directory: ./front-dislinkt
         
       - name: Prepare release plugins
