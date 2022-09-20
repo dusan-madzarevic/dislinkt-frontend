@@ -49,6 +49,9 @@ export class PostComponent implements OnInit {
     }
     this.fetchComments();
     this.fetchReactions();
+    if(this.post == null){
+      return;
+    }
     this.post.text = this.linkify(this.post.text);
   }
   
@@ -95,6 +98,9 @@ export class PostComponent implements OnInit {
   }
 
   fetchReactions(): void{
+    if(this.post == null){
+      return;
+    }
     this.reactionService.fetchReactionsForPost(this.post.id).subscribe(
       (reactions: Reaction[]) => {
       this.reactions = reactions;
