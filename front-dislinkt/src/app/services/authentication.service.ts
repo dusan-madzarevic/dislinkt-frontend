@@ -13,10 +13,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AuthenticationService {
 
-  private readonly API_REG: string = `${environment.postUrl}/${environment.apiReg}`;
-  private readonly API_LOGIN: string = `${environment.postUrl}/${environment.apiLogin}`;
-  private readonly API_USER: string = `${environment.postUrl}/${environment.apiUser}`;
-  private readonly API_USERS: string = `${environment.postUrl}/${environment.apiUsers}`;
+  private readonly API_REG: string = `${environment.profileUrl}/${environment.apiReg}`;
+  private readonly API_LOGIN: string = `${environment.profileUrl}/${environment.apiLogin}`;
+  private readonly API_USER: string = `${environment.profileUrl}/${environment.apiUser}`;
+  private readonly API_USERS: string = `${environment.profileUrl}/${environment.apiUsers}`;
   readonly STORAGE_KEY = 'auth';
   readonly PROFILE_KEY = 'profile';
 

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8000',
-  postUrl: 'http://localhost:8001',
+  postUrl1: 'http://localhost:8000',
+  profileUrl: 'http://localhost:8001',
   apiReg: 'register',
   apiPost: 'post',
   apiImage: 'images',

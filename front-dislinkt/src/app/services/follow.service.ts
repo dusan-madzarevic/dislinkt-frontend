@@ -14,7 +14,7 @@ export class FollowService {
     private http: HttpClient,
   ) { }
 
-  readonly API_FOLLOW: string = `${environment.baseUrl}/${environment.apiFollow}`;
+  readonly API_FOLLOW: string = `${environment.profileUrl}/${environment.apiFollow}`;
 
   checkFollow(id1: number, id2: number): Observable<any> {
     return this.http.get(`${this.API_FOLLOW}/${id1}/${id2}`).pipe(map((data: any) => {

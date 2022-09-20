@@ -14,8 +14,8 @@ import { PasswordChange } from '../models/password-change';
 })
 export class ProfileService {
   
-  private readonly API_PROFIL: string = `${environment.postUrl}/${environment.apiProfil}`;
-  private readonly API_USER: string = `${environment.postUrl}/user`;
+  private readonly API_PROFIL: string = `${environment.profileUrl}/${environment.apiProfil}`;
+  private readonly API_USER: string = `${environment.profileUrl}/user`;
 
   constructor(
     private http: HttpClient, 

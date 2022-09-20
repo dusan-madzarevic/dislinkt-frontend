@@ -15,8 +15,8 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  readonly API_AUTH: string = `${environment.baseUrl}/${environment.apiAuth}`;
-  readonly API_USER: string = `${environment.baseUrl}/user`
+  readonly API_AUTH: string = `${environment.profileUrl}/${environment.apiAuth}`;
+  readonly API_USER: string = `${environment.postUrl1}/user`
 
 
   login(formData: FormData): Observable<Token>{
@@ -27,7 +27,7 @@ export class UserService {
 
   get_User(): Observable<User>{
     // return this.http.get(`${this.API_AUTH}/users/me`).pipe(
-      return this.http.get(`${environment.postUrl}/${environment.apiUser}`).pipe(
+      return this.http.get(`${environment.profileUrl}/${environment.apiUser}`).pipe(
         catchError(() => of(null))
     );
   }
@@ -39,7 +39,7 @@ export class UserService {
   }
 
   search_users(name: string): Observable<User[]>{
-    return this.http.get(`${environment.postUrl}/profiles/${name}`).pipe(
+    return this.http.get(`${environment.profileUrl}/profiles/${name}`).pipe(
       catchError(() => of(null))
     );
   }

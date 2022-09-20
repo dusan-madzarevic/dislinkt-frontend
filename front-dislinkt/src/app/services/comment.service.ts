@@ -15,7 +15,7 @@ export class CommentService {
   ) 
   { }
 
-  readonly API_COMMENT: string = `${environment.baseUrl}/${environment.apiComment}`;
+  readonly API_COMMENT: string = `${environment.postUrl1}/${environment.apiComment}`;
 
   fetchCommentsForPost(postId: number): Observable<any> {
     return this.http.get(`${this.API_COMMENT}/${postId}`).pipe(map((data: any) => {
