@@ -1,0 +1,19 @@
+<div>
+    <div class="toolbar">
+        <button mat-button *ngIf="!guest" (click)="profile()"><mat-icon>account_circle</mat-icon></button>
+        <h2 (click)="dislinkt()">Dislinkt</h2>
+        <div class="spacer"></div>
+        <div *ngIf = "guest">
+            <button mat-button  (click)="login()"><mat-icon>exit_to_app</mat-icon>  Sign In</button>
+            <button mat-button (click)="register()"><mat-icon>person_add</mat-icon>  Sign Up</button>
+        </div>
+        <div *ngIf = "!guest">
+            <button mat-button  (click)="requests()">  Following Requests</button>
+            <!-- <button mat-button  (click)="profile()">  Profile</button> -->
+            <button mat-button (click)="signOut()"><mat-icon>exit_to_app</mat-icon>  Sign Out</button>
+        </div>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

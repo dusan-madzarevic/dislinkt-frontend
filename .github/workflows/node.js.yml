@@ -5,31 +5,28 @@ name: Node.js CI
 
 on:
   pull_request:
+  push:
+    branches:
+     - main
+     - development
 
 jobs:
   build:
-    name: Build & Test
+    name: Build, Test & Release
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Cache node modules
-        uses: actions/cache@v1
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          token: ${{ secrets.GIT_TOKEN }}
             
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.17.0
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: 'front-dislinkt/package-lock.json'
 
       - name: Install Dependencies
         run: npm ci
@@ -42,3 +39,37 @@ jobs:
       - name: Build Application
         run: npm run build
         working-directory: ./front-dislinkt
+        
+      - name: Zip dist folder
+        run: tar cvzf dist.tar.gz dist
+        working-directory: ./front-dislinkt
+        
+      - name: Prepare release plugins
+        run: npm install @semantic-release/git @semantic-release/github @semantic-release/changelog @semantic-release/exec -D
+        working-directory: ./front-dislinkt
+        
+      - name: Release
+        working-directory: ./front-dislinkt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release --branches development
+    
+        
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: front-dislinkt
+          args: >
+            -Dsonar.sources=./src/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          

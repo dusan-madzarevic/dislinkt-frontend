@@ -1,0 +1,34 @@
+<div>
+    <button *ngIf = "!guest" class="postButton" mat-fab (click)="newPost()"><mat-icon>add</mat-icon></button>
+        <app-center-container>
+            <form [formGroup]="searchForm" class="search">
+                <div [class.disabled]="searchPending">
+                    <mat-icon>search</mat-icon>
+                    <mat-form-field style="margin-right: 10px;">
+                        <mat-label>Search profile</mat-label>
+                        <input class = "inline"
+                        matInput 
+                        autocomplete="off"
+                        formControlName="profile" 
+                        placeholder="Enter profile name">
+                        
+                    </mat-form-field>
+                    <button class="inline" mat-raised-button 
+                        color="primary" (click)="searchUsers()">Search</button>
+                </div>
+            </form>
+        </app-center-container>
+        <div class="searchResult" *ngIf="search">
+            <mat-list>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let user of foundUsers" style="margin: bottom 5px;margin-top: 5px;">
+                    <app-profile-short [id]="user['profile_id']" [name]="user['name']" [surname]="user['surname']" [date]="" [small] = "false"></app-profile-short>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
+            <button  mat-fab (click)="notSearch()"><mat-icon>arrow_back</mat-icon></button>
+        </div>
+        <div *ngIf="!search">
+            <app-post *ngFor="let post of posts" [post]= "post"></app-post>
+        </div>
+</div>

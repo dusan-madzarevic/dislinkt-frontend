@@ -1,0 +1,43 @@
+<app-form-container>
+    <h2>Sign In</h2>
+    <form [formGroup]="loginForm">
+        <div [class.disabled]="loginPending">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="username" 
+                placeholder="Enter email">
+                <mat-error>
+                    Enter email!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input 
+                type="password" 
+                matInput 
+                autocomplete="off"
+                formControlName="password"
+                placeholder="Unesite lozinku">
+                <mat-error>
+                    Enter password!
+                </mat-error>    
+            </mat-form-field>
+        </div>
+        <br>
+        <app-center-container>
+            <button 
+            *ngIf="!loginPending"
+            mat-raised-button 
+            color="primary"
+            (click)="login()">Sign in</button>
+            <app-spinner-button *ngIf="loginPending"></app-spinner-button>
+        </app-center-container>
+        <app-center-container>
+            <mat-icon [ngStyle]="{'color':'black'}">person_add</mat-icon>
+            <a routerLink="register">Register</a>
+        </app-center-container>
+    </form>
+</app-form-container>

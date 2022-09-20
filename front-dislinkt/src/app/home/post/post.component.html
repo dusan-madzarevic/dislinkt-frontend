@@ -1,0 +1,30 @@
+<mat-card>
+    <app-profile-short [id]="post['user_id']" [name]="post['name']" [surname]="post['surname']" [date]="post['date']" [small]="false"></app-profile-short>
+
+    <app-image *ngIf="post.picture" [imagePath]="post.picture" [post]="true"></app-image>
+    <mat-card-content>
+        <div [innerHtml]="post['text']"></div>
+    </mat-card-content>
+    <mat-card-actions>
+        <mat-icon id = "like" class="action" (click)="like()" [style.disabled]="disableReactions" [style.color]="likeColor">favorite_border</mat-icon>
+        <mat-icon id = "dislike" class="action"(click)="dislike()"  [style.disabled]="disableReactions" [style.color]="dislikeColor">close</mat-icon>
+        <mat-icon class="action" (click)="toggle()">chat_bubble_outline</mat-icon>
+        <div [style.display]="displayComments" class="comments">
+            <mat-list>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let comment of comments" style="text-align: center;">
+                    <app-profile-short [id]="comment['user_id']" [name]="comment['name']" [surname]="comment['surname']" [date]="" [small]="true"></app-profile-short>   
+                    &nbsp; &nbsp;{{comment.text}}<mat-divider></mat-divider></mat-list-item>
+                <div id="reply" *ngIf="!guest">
+                    <textarea class = "comment" placeholder="Comment..." [(ngModel)]="commentText"></textarea>
+                    <button mat-flat-button (click)="comment()">
+                        <mat-icon>send</mat-icon></button>
+                </div>
+                
+            </mat-list>
+            <div *ngIf="guest">
+                <div *ngIf="comments?.length == 0"><p>No comments</p></div>
+            </div>
+        </div>
+    </mat-card-actions>    
+</mat-card>

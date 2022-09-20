@@ -1,0 +1,105 @@
+<app-form-container>
+    <h2>Edit profile</h2>
+    <form [formGroup]="profileForm">
+        <div>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="email" 
+                placeholder="Enter email">
+                <mat-error>
+                    Email is required!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="username"
+                placeholder="Enter username">
+                <mat-error>
+                    Username is required!
+                </mat-error>    
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="ime"
+                placeholder="Enter first name">   
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Last name</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="prezime"
+                placeholder="Enter last name">   
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Biography</mat-label>
+                <textarea  
+                matInput 
+                autocomplete="off"
+                formControlName="description"
+                placeholder="Enter biography">   
+                </textarea> 
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone</mat-label>
+                <input 
+                matInput 
+                autocomplete="off"
+                formControlName="telefon"
+                placeholder="Enter phone number">   
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Birth date</mat-label>
+                <input 
+                matInput 
+                [matDatepicker]="picker"
+                formControlName="datumRodjenja"
+                placeholder="Enter birth date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div>
+                <mat-label>Gender</mat-label>
+                <mat-radio-group ngDefaultControl formControlName="pol"
+                aria-labelledby="pol-radio-group-label"
+                class="pol-radio-group">
+                    <mat-radio-button class="pol-radio-button" value="m">Male</mat-radio-button>
+                    <mat-radio-button class="pol-radio-button" value="z">Female</mat-radio-button>
+                </mat-radio-group>   
+            </div> 
+            <div>
+                <mat-label>Profile privacy</mat-label>
+                <mat-radio-group ngDefaultControl formControlName="privacy"
+                aria-labelledby="pol-radio-group-label"
+                class="pol-radio-group">
+                    <mat-radio-button class="pol-radio-button" value="public">public</mat-radio-button>
+                    <mat-radio-button class="pol-radio-button" value="private">private</mat-radio-button>
+                </mat-radio-group>   
+            </div> 
+        </div>
+        <br>
+        <app-center-container>
+            <button 
+                mat-raised-button 
+                color="primary"
+                (click)="save()">
+                Save
+            </button>
+            <button 
+                mat-raised-button 
+                color="basic"
+                (click)="cancel()">
+                Cancel
+            </button>
+        </app-center-container>
+    </form>
+</app-form-container>

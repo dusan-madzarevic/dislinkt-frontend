@@ -1,0 +1,101 @@
+<div class="dashboard-container" *ngIf="userProfile">
+
+    <div class="title">
+        <h1>{{user.username}}</h1>
+    </div>
+      
+    <div class="flex-container">
+
+        <div class="flex-child image">
+            <img class="profile" src="assets/plazica.jpg" alt="Profile picture"/>
+        </div>
+        
+        <div class="flex-child">
+            <p class="name">{{user.ime + " " + user.prezime}}</p>
+            <p>E-mail: {{user.email}}</p>
+            <p>Phone: {{user.telefon}}</p>
+            <p>{{user.pol}}</p>
+            <p>{{userProfile.description}}</p>
+        </div>
+
+        <div class="flex-child button">
+            <button mat-raised-button class="profile-button" color="basic" (click)="editProfile()">
+                <mat-icon>edit</mat-icon> Edit profile
+            </button>
+            <button mat-raised-button class="profile-button" color="basic" (click)="changePassword()">
+                <mat-icon>edit</mat-icon> Change password
+            </button>
+        </div>
+        
+    </div>
+
+    <mat-divider></mat-divider>
+
+      
+    <div class="flex-container">
+
+        <div class="flex-child">
+
+            <!-- <p class="my-heading">Education & Experience</p> -->
+            <mat-list>
+                <div mat-subheader>
+                    <p class="my-heading">Education & Experience</p>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="openEducationDialog()">
+                            <mat-icon>add</mat-icon> Add education
+                        </button>
+                    </div>
+                    
+                </div>
+                <mat-list-item *ngFor="let education of educationList">
+                    <div>
+                        <div mat-line>{{education.degree}}</div>
+                        <div mat-line>{{education.school}}</div>
+                        <div mat-line> {{education.start + " - " + education.end}} </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="deleteEducation(education.id)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                    
+                </mat-list-item>
+            </mat-list>
+            
+        </div>
+        
+        <div class="flex-child">
+            <mat-list>
+                <div mat-subheader>
+                    <p class="my-heading">Skills & Interests</p>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="openSkillDialog()">
+                            <mat-icon>add</mat-icon> Add skill
+                        </button>
+                    </div>
+                    
+                </div>
+                <mat-list-item *ngFor="let skill of skillList">
+                    <div>
+                        <div mat-line>{{skill.skillname}}</div>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="button-div">
+                        <button mat-raised-button color="basic" (click)="deleteSkill(skill.id)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                    
+                </mat-list-item>
+            </mat-list>
+
+        </div>
+        
+    </div>
+
+<mat-divider></mat-divider>
+
+<div class="container">
+    <app-post *ngFor="let post of posts" [post]= "post"></app-post>
+</div>
+
+
+</div>
+

@@ -1,0 +1,55 @@
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #25357c;
+    color: white;
+    font-weight: 600;
+    z-index: 10;
+}
+
+button {
+    background-color: #25357c;
+    margin-right: 5px;
+}
+
+.content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    background-color: white;
+
+    align-items: center;
+}
+
+h2{
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.content{
+    height: 100%;
+    overflow-y:auto;
+}
+
+.search{
+    width: 100%;
+}
+
+.postButton{
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    background-color: #25357c;
+
+}
