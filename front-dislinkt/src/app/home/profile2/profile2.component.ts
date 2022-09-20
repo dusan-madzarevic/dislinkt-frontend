@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReturnStatement } from '@angular/compiler';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +19,9 @@ export class Profile2Component implements OnInit {
     public userService: UserService,
     public authService: AuthenticationService,
     public postService: PostService,
-    public followService: FollowService
+    public followService: FollowService,
+    public router: Router,
+
   ) { }
 
   id: number;
@@ -44,6 +46,9 @@ export class Profile2Component implements OnInit {
     }
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = parseInt(params.get('id'));
+      if (this.id == user.id) {
+        this.router.navigate(['/profile']);
+      }
       console.log(this.id);
       this.userService.get_User_id(this.id).subscribe(
         (res: any) => {
