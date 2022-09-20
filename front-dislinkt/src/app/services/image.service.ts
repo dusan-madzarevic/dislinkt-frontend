@@ -12,7 +12,7 @@ export class ImageService {
     private http: HttpClient,
   ) { }
 
-  readonly API_IMAGE: string = `${environment.baseUrl}/${environment.apiImage}`;
+  readonly API_IMAGE: string = `${environment.postUrl1}/${environment.apiImage}`;
 
 
   getImage(path: string): Observable<Blob> {

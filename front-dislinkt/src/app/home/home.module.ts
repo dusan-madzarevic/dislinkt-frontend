@@ -9,6 +9,7 @@ import { EducationDialog, PasswordDialog, ProfileComponent, SkillDialog } from '
 import { PostsViewComponent } from './posts-view/posts-view.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { Profile2Component } from './profile2/profile2.component';
+import { RequestsComponent } from './requests/requests.component';
 
 
 
@@ -22,7 +23,8 @@ import { Profile2Component } from './profile2/profile2.component';
     PostsViewComponent,
     SkillDialog,
     PasswordDialog,
-    Profile2Component
+    Profile2Component,
+    RequestsComponent
   ],
   imports: [
     CommonModule,

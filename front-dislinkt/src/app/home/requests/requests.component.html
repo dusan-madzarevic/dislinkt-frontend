@@ -1,0 +1,15 @@
+<div>
+    <p>Following Requests</p>
+    <app-center-container>
+        <mat-list>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let request of requests" style="margin: bottom 5px;margin-top: 5px;">
+                <app-profile-short [id]="request['profile_id']" [name]="request['name']" [surname]="request['surname']" [date]="" [small] = "false"></app-profile-short>
+                <button class="inline" mat-raised-button 
+                        color="primary" (click)="accept(request['profile_id'])">Accept</button>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </app-center-container>
+</div>
+

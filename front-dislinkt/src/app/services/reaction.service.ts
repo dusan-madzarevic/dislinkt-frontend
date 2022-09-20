@@ -14,7 +14,7 @@ export class ReactionService {
     private http: HttpClient,
   ) { }
 
-  readonly API_REACTION: string = `${environment.postUrl}/${environment.apiReaction}`;
+  readonly API_REACTION: string = `${environment.postUrl1}/${environment.apiReaction}`;
 
   fetchReactionsForPost(postId: number): Observable<any> {
     return this.http.get(`${this.API_REACTION}/${postId}`).pipe(map((data: any) => {

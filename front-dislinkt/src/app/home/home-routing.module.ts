@@ -6,6 +6,7 @@ import { PostsViewComponent } from './posts-view/posts-view.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile.component';
 import { Profile2Component } from './profile2/profile2.component';
+import { RequestsComponent } from './requests/requests.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
         path: `${PROFILES_PATH}/:id`,
         component: Profile2Component
       },
+      {
+        path: "requests",
+        component: RequestsComponent
+      }
 
     ]
 },];
