@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     let user = this.authService.getUser();
+    console.log(user);
     if(!user){
       this.guest = true;
       console.log("neregistrovan korisnik");
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
       this.guest = false;
       console.log("registrovan korisnik");
       console.log(user.profile_id)
+      // window.location.reload();
     }
     this.router.navigate(['/posts']);
   }
@@ -56,7 +58,12 @@ export class HomeComponent implements OnInit {
 
   signOut(){
     this.authService.logout();
+    // this.authService.deleteUser();
     window.location.reload();
   }
   
+  dislinkt(){
+    this.router.navigate(['/posts']);
+  }
+
 }

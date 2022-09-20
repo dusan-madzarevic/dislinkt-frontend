@@ -5,23 +5,41 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8000',
-  apiPost: 'posts',
+  postUrl: 'http://localhost:8001',
+  apiReg: 'register',
+  apiPost: 'post',
   apiImage: 'images',
   apiComment: 'comments',
-  // apiReg: 'register',
-  // apiLogin: 'token',
-  // apiUser: 'users/me'
-};
-
-export const environment1 = {
-  production: false,
-  baseUrl: 'http://localhost:8001',
-  apiReg: 'register',
+  apiFollow: 'follow',
+  apiAuth: 'auth',
+  apiReaction: 'reaction',
   apiLogin: 'token',
   apiUser: 'users/me',
   apiProfil: 'profile',
+  apiProfiles: 'profiles',
   apiUsers: 'users',
 };
+
+// export const environment = {
+//   production: false,
+//   baseUrl: 'http://localhost:8000',
+//   apiPost: 'posts',
+//   apiImage: 'images',
+//   apiComment: 'comments',
+//   // apiReg: 'register',
+//   // apiLogin: 'token',
+//   // apiUser: 'users/me'
+// };
+
+// export const environment1 = {
+//   production: false,
+//   baseUrl: 'http://localhost:8001',
+//   apiReg: 'register',
+//   apiLogin: 'token',
+//   apiUser: 'users/me',
+//   apiProfil: 'profile',
+//   apiUsers: 'users',
+// };
 
 /*
  * For easier debugging in development mode, you can import the following file

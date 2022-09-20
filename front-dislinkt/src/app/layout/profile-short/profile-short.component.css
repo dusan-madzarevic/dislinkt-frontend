@@ -11,8 +11,24 @@ img.profile {
     margin-right: 10px;
  }
 
+ img.small {
+    height: 40px;
+    max-width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+ }
+
  div.date {
     color:grey;
     font-size: 14px;
     margin-top: 5px;
+ }
+
+ div.small{
+    font-size: 13px;
+ }
+
+ div.all:hover{
+   cursor: pointer;
  }
