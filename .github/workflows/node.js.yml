@@ -43,7 +43,7 @@ jobs:
         working-directory: ./front-dislinkt
         
       - name: Prepare release plugins
-        run: npm install @semantic-release/git @semantic-release/changelog @semantic-release/exec -D
+        run: npm install @semantic-release/git @semantic-release/github @semantic-release/changelog @semantic-release/exec -D
         working-directory: ./front-dislinkt
         
       - name: Release
