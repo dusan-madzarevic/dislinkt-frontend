@@ -93,7 +93,7 @@
 <mat-divider></mat-divider>
 
 <div class="container">
-    Postovi
+    <app-post *ngFor="let post of posts" [post]= "post"></app-post>
 </div>
 
 

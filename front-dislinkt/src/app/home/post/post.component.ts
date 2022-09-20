@@ -167,6 +167,8 @@ export class PostComponent implements OnInit {
     comment.post_id = this.post.id;
     comment.text = this.commentText;
     this.commentService.addComment(comment).subscribe();
+    this.fetchComments();
+    this.commentText = "";
   }
 
 }

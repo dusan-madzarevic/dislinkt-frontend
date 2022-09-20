@@ -4,11 +4,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { Education } from 'src/app/models/education';
 import { PasswordChange } from 'src/app/models/password-change';
+import { Post } from 'src/app/models/post';
 import { Profile } from 'src/app/models/profile';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ImageService } from 'src/app/services/image.service';
+import { PostService } from 'src/app/services/post.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 export interface EducationDialogData {
@@ -42,13 +44,16 @@ export class ProfileComponent implements OnInit {
   profilePicture: any;
   educationList: Education[] = [];
   skillList: Skill[] = [];
+  posts: Post[] = [];
 
   constructor(
     private authService : AuthenticationService,
     private profileService : ProfileService,
     private imageService : ImageService,
     private route : Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public postService: PostService,
+
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +66,13 @@ export class ProfileComponent implements OnInit {
         response => {
           console.log(response);
           this.userProfile = response;
+
+          this.postService.fetchUserPosts(this.userProfile.id).subscribe(
+            (res: Post[]) => {
+              console.log(res);
+              this.posts = res;
+            }
+          );
 
           this.profileService.getEducation(this.userProfile.id).subscribe(
             result => {
