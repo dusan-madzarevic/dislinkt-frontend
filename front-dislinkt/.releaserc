@@ -23,7 +23,9 @@
           "npmPublish": true
         }
       ],
-      "@semantic-release/git"
+      ["@semantic-release/git",
+	  {"assets": ["dist.zip"]}
+	  ]
     ],
     "repositoryUrl": "https://github.com/dusan-madzarevic/dislinkt-frontend"
   }
