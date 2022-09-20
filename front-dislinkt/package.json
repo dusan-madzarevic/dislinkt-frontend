@@ -59,8 +59,8 @@
         {
           "assets":[
             {
-              "path":"dist.zip",
-              "label":"dislinkt-front-latest.zip"
+              "path":"dist.tar.gz",
+              "label":"dislinkt-front-latest.tar.gz"
             }
           ]
         }
