@@ -11,7 +11,7 @@
           "assets":[
             {
               "path":"dist.zip",
-              "label":"dislinkt-front-${nextRelease.gitTag}.zip"
+              "label":"dislinkt-front-latest.zip"
             }
           ]
         }
