@@ -29,7 +29,7 @@ jobs:
           cache-dependency-path: 'front-dislinkt/package-lock.json'
 
       - name: Install Dependencies
-        run: npm install --no-package-lock
+        run: npm ci
         working-directory: ./front-dislinkt
           
       - name: Run Unit Tests
