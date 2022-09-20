@@ -3,8 +3,7 @@
         <mat-card-title>Create Post</mat-card-title>
     </mat-card-header>
     <div>
-        <textarea placeholder="Type ...">
-
+        <textarea placeholder="Type ..." [(ngModel)]="text">
         </textarea>
     </div>
     <div id="preview">
@@ -17,7 +16,7 @@
                 <mat-icon>insert_photo</mat-icon>
             </label>
         </button>
-        <button mat-flat-button color="primary">Post
+        <button mat-flat-button color="primary" (click)="createPost()">Post
         </button>             
     </mat-card-actions>
 </mat-card>

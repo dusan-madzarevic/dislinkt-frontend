@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { PostCreate } from '../models/postcreate';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,12 @@ export class PostService {
 
   readonly API_POST: string = `${environment.postUrl1}/${environment.apiPost}`;
 
+  addPost(post: PostCreate): Observable<any> {
+    return this.http.post(`${this.API_POST}`, post).pipe(map((data: any) => {
+      return data;
+    }));
+  }
+  
   fetchPosts(): Observable<any> {
     return this.http.get(`${this.API_POST}`).pipe(map((data: any) => {
       return data;

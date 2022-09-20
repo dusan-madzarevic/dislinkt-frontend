@@ -55,7 +55,7 @@ export class PostsViewComponent implements OnInit {
       console.log(result);
       this.ngOnInit();
     });
-    ;
+    
   }
 
   getAllPosts(): void{

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PostCreate } from 'src/app/models/postcreate';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ImageService } from 'src/app/services/image.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-create-post',
@@ -7,10 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public postService: PostService,
+    public imageService: ImageService,
+    public authService: AuthenticationService
+  ) { }
 
-  fileName: String = '';
+  fileName: string = '';
   file: File;
+  text: string = '';
+
 
   ngOnInit(): void {
   }
@@ -34,4 +44,28 @@ export class CreatePostComponent implements OnInit {
         )
     }
   }
+
+
+  createPost(){
+    let user = this.authService.getUser();
+    const post = {} as PostCreate;
+    post.text = this.text;
+    post.user_id = user.id;
+    post.picture="";
+    if (this.file){
+      const formData: FormData = new FormData();
+      
+      formData.append('file', this.file);
+      this.imageService.uploadImage(formData).subscribe();
+      post.picture = this.fileName;
+    }
+    console.log(post);
+    this.postService.addPost(post).subscribe(
+      result => {
+        window.location.reload();
+      }
+    );
+
+  }
+  
 }
